@@ -26,7 +26,7 @@ namespace VendingMachine
             get
             {
                 var directoryPath = AppDomain.CurrentDomain.BaseDirectory;
-                return Path.GetFullPath(Path.Combine(directoryPath, "..//..//..//VendingMachineDB.mdf"));
+                return Path.GetFullPath(Path.Combine(directoryPath, "..//..//..//App_Data//VendingMachineDB.mdf"));
             }
         }
 
@@ -42,7 +42,7 @@ namespace VendingMachine
 
             services.AddDbContext<DbVendingMachineContext>(options =>
             {
-                options.UseSqlServer(@$"Data Source=localhost\SQLEXPRESS;DataBase=VendingMachineDB;Integrated Security=True;Connect Timeout=30;");
+                options.UseSqlServer(@$"Data Source=localhost\SQLEXPRESS;DataBase=VendingMachineDB;Integrated Security=True;Connect Timeout=30;AttachDbFilename={MDF_Directory}");
             });
         }
 
