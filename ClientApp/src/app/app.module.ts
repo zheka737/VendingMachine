@@ -6,30 +6,31 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { VendingMachinePanel } from "./components/vendingMachinePanel/vendingMachinePanel.component";
+import { VendingMachinePanelComponent } from "./components/vendingMachinePanel/vendingMachinePanel.component";
 import { AppStateControlService } from "./services/appStateControl.service";
 import { BeverageIsReadyToBeTakenStateService } from "./services/states/beverageIsReadyToBeTakenState.service";
 import { GettingBeverageReadyStateService } from "./services/states/gettingBeverageReadyState.service";
 import { GiveChangeStateService } from "./services/states/giveChangeState.service";
-import { MainMenuStateService } from "./services/states/mainMenuState.service";
+import { MainStateService } from "./services/states/mainState.service";
 
 @NgModule({
-  declarations: [AppComponent, VendingMachinePanel],
+  declarations: [AppComponent, VendingMachinePanelComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: "", component: VendingMachinePanel, pathMatch: "full" }
+      { path: "", component: VendingMachinePanelComponent, pathMatch: "full" }
     ]),
     NgbModule
   ],
   providers: [
     AppStateControlService,
-    BeverageIsReadyToBeTakenStateService,
+    MainStateService,
     GettingBeverageReadyStateService,
+    BeverageIsReadyToBeTakenStateService,
     GiveChangeStateService,
-    MainMenuStateService
+
   ],
   bootstrap: [AppComponent]
 })

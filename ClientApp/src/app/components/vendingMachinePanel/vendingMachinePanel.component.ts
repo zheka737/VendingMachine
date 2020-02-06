@@ -4,6 +4,6 @@ import { Component } from "@angular/core";
   selector: 'vending-machine-panel',
   templateUrl: "./vendingMachinePanel.component.html"
 })
-export class VendingMachinePanel {
+export class VendingMachinePanelComponent {
 
 }

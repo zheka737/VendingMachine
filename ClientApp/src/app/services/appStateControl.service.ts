@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IState } from "./states/state";
-import { MainMenuStateService } from "./states/mainMenuState.service";
+import { MainStateService } from "./states/mainState.service";
 
 
 @Injectable()
@@ -8,7 +8,7 @@ export class AppStateControlService {
 
   private state: IState = null;
 
-  constructor(mainMenuStateService: MainMenuStateService) {
+  constructor() {
     this.setState(mainMenuStateService)
   }
 
