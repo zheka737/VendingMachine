@@ -6,7 +6,7 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { VendingMachinePanel } from "./vendingMachinePanel/vendingMachinePanel.component";
+import { VendingMachinePanel } from "./components/vendingMachinePanel/vendingMachinePanel.component";
 import { AppStateControlService } from "./services/appStateControl.service";
 import { BeverageIsReadyToBeTakenStateService } from "./services/states/beverageIsReadyToBeTakenState.service";
 import { GettingBeverageReadyStateService } from "./services/states/gettingBeverageReadyState.service";

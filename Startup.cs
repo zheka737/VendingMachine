@@ -1,10 +1,14 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VendingMachine.Model.DAL;
 
 namespace VendingMachine
 {
@@ -17,6 +21,15 @@ namespace VendingMachine
 
         public IConfiguration Configuration { get; }
 
+        public static string MDF_Directory
+        {
+            get
+            {
+                var directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+                return Path.GetFullPath(Path.Combine(directoryPath, "..//..//..//VendingMachineDB.mdf"));
+            }
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -26,7 +39,14 @@ namespace VendingMachine
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<DbVendingMachineContext>(options =>
+            {
+                options.UseSqlServer(@$"Data Source=localhost\SQLEXPRESS;DataBase=VendingMachineDB;Integrated Security=True;Connect Timeout=30;AttachDbFilename={MDF_Directory}");
+            });
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
