@@ -12,6 +12,8 @@ namespace VendingMachine.Model.DAL
 
         public int Cost { get; set; }
 
+
+        public virtual BeverageStore BeverageStore { get; set; }
     }
 
 }

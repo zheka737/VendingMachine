@@ -20,20 +20,21 @@ namespace VendingMachine.Migrations
 
             modelBuilder.Entity("VendingMachine.Model.DAL.BeverageStore", b =>
                 {
-                    b.Property<int>("BeverageTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BeverageTypeId1")
+                    b.Property<int>("BeverageTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("BeverageTypeId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("BeverageTypeId1");
+                    b.HasIndex("BeverageTypeId")
+                        .IsUnique();
 
                     b.ToTable("BeverageStores");
                 });
@@ -76,7 +77,7 @@ namespace VendingMachine.Migrations
 
             modelBuilder.Entity("VendingMachine.Model.DAL.CoinTypeSettings", b =>
                 {
-                    b.Property<int>("CoinTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -84,32 +85,34 @@ namespace VendingMachine.Migrations
                     b.Property<bool>("Blocked")
                         .HasColumnType("bit");
 
-                    b.Property<int>("CoinTypeId1")
+                    b.Property<int>("CoinTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("CoinTypeId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CoinTypeId1");
+                    b.HasIndex("CoinTypeId")
+                        .IsUnique();
 
                     b.ToTable("CoinTypeSettings");
                 });
 
             modelBuilder.Entity("VendingMachine.Model.DAL.CoinVault", b =>
                 {
-                    b.Property<int>("CoinTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CoinTypeId1")
+                    b.Property<int>("CoinTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.HasKey("CoinTypeId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CoinTypeId1");
+                    b.HasIndex("CoinTypeId")
+                        .IsUnique();
 
                     b.ToTable("CoinVaults");
                 });
@@ -117,8 +120,8 @@ namespace VendingMachine.Migrations
             modelBuilder.Entity("VendingMachine.Model.DAL.BeverageStore", b =>
                 {
                     b.HasOne("VendingMachine.Model.DAL.BeverageType", "BeverageType")
-                        .WithMany()
-                        .HasForeignKey("BeverageTypeId1")
+                        .WithOne("BeverageStore")
+                        .HasForeignKey("VendingMachine.Model.DAL.BeverageStore", "BeverageTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -126,8 +129,8 @@ namespace VendingMachine.Migrations
             modelBuilder.Entity("VendingMachine.Model.DAL.CoinTypeSettings", b =>
                 {
                     b.HasOne("VendingMachine.Model.DAL.CoinType", "CoinType")
-                        .WithMany()
-                        .HasForeignKey("CoinTypeId1")
+                        .WithOne("CoinTypeSettings")
+                        .HasForeignKey("VendingMachine.Model.DAL.CoinTypeSettings", "CoinTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -135,8 +138,8 @@ namespace VendingMachine.Migrations
             modelBuilder.Entity("VendingMachine.Model.DAL.CoinVault", b =>
                 {
                     b.HasOne("VendingMachine.Model.DAL.CoinType", "CoinType")
-                        .WithMany()
-                        .HasForeignKey("CoinTypeId1")
+                        .WithOne("CoinVault")
+                        .HasForeignKey("VendingMachine.Model.DAL.CoinVault", "CoinTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

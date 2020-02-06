@@ -27,18 +27,16 @@ namespace VendingMachine.Model.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<BeverageStore>(entity => {
-                entity.HasKey(e => e.BeverageTypeId);
-                entity.HasOne(e => e.BeverageType).WithMany();
+                entity.HasOne(e => e.BeverageType).WithOne(o => o.BeverageStore).HasForeignKey<BeverageStore>(e => e.BeverageTypeId);
             });
 
             modelBuilder.Entity<CoinTypeSettings>(entity => {
-                entity.HasKey(e => e.CoinTypeId);
-                entity.HasOne(e => e.CoinType).WithMany();
+                entity.HasOne(e => e.CoinType).WithOne(o => o.CoinTypeSettings).HasForeignKey<CoinTypeSettings>(e => e.CoinTypeId);
             });
 
             modelBuilder.Entity<CoinVault>(entity => {
-                entity.HasKey(e => e.CoinTypeId);
-                entity.HasOne(e => e.CoinType).WithMany();
+                entity.HasOne(e => e.CoinType).WithOne(o => o.CoinVault).HasForeignKey<CoinVault>(e => e.CoinTypeId);;
+
             });
         }
     }
