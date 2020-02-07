@@ -28,6 +28,14 @@ namespace VendingMachine.Controllers {
             }).ToListAsync();
         }
 
+        [HttpGet, Route("api/get-coins-description")]
+        public async Task<List<CoinTypeDescriptionDTO>> GetCoinsDescription() {
+            return await db.CoinTypes.Select(e => new CoinTypeDescriptionDTO{
+                Nominal = e.Nominal,
+                Blocked = e.CoinTypeSettings.Blocked
+            }).ToListAsync();
+        }
+
     }
 
 }

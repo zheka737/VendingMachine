@@ -10,7 +10,7 @@ import { VendingMachinePanelComponent } from "./components/vendingMachinePanel/v
 import { AppStateControlService } from "./states/appStateControl.service";
 import { BeverageSelectorComponent } from "./components/beverageSelector/beverageSelector.component";
 import { BeverageCardComponent } from "./components/beverageSelector/beverageCard/beverageCard.component";
-import { BeverageSelectorService } from "./services/beverageSelectorService";
+import { BeverageSelectorService } from "./services/beverageSelector.service";
 import { BeveragesDescriptionRepository } from "./model/beverageDescription.repository";
 import { RestDataSource } from "./model/rest.datasource";
 
@@ -30,7 +30,8 @@ import { RestDataSource } from "./model/rest.datasource";
     AppStateControlService,
     BeverageSelectorService,
     RestDataSource,
-    BeveragesDescriptionRepository
+    BeveragesDescriptionRepository,
+    CoinboxService
   ],
   bootstrap: [AppComponent]
 })

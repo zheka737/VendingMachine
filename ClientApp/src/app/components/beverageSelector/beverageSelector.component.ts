@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { BeverageSelectorService } from "src/app/services/beverageSelectorService";
+import { BeverageSelectorService } from "src/app/services/beverageSelector.service";
 import { BeverageDescription } from "src/app/model/beverageDescription.model";
 
 @Component({

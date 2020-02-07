@@ -5,14 +5,17 @@ import { GiveChangeState } from "./giveChangeState";
 import { GettingBeverageReadyState } from "./gettingBeverageReadyState";
 import { BeverageIsReadyToBeTakenState } from "./beverageIsReadyToBeTakenState";
 import { BeveragesDescriptionRepository } from "../model/beverageDescription.repository";
-
+import { CoinRepository } from "../model/coin.repository";
 
 @Injectable()
 export class AppStateControlService {
-
   private state: IState = null;
 
-  constructor(private beverageDescriptionRepository: BeveragesDescriptionRepository) {
+  constructor(
+    private beverageDescriptionRepository: BeveragesDescriptionRepository,
+    private coinRepository: CoinRepository
+  ) {
+    this.coinRepository.loadCoinsDescription();
     this.setMainState();
   }
 
@@ -22,27 +25,22 @@ export class AppStateControlService {
   }
 
   setMainState() {
-    this.setState(new MainState(this))
+    this.setState(new MainState(this));
   }
 
   setGiveChangeState() {
-    this.setState(new GiveChangeState(this))
+    this.setState(new GiveChangeState(this));
   }
 
   setGettingBeverageReadyState() {
-    this.setState(new GettingBeverageReadyState(this))
+    this.setState(new GettingBeverageReadyState(this));
   }
 
   setBeverageIsReadyToBeTakenState() {
-    this.setState(new BeverageIsReadyToBeTakenState(this))
+    this.setState(new BeverageIsReadyToBeTakenState(this));
   }
 
   updateBeverageDescriptions() {
     this.beverageDescriptionRepository.updateBeverageDescriptions();
   }
-
 }
-
-
-
-
