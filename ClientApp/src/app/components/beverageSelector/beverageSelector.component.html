@@ -1,7 +1,7 @@
 <div>
 
   <div *ngFor="let beverage of beverageSelectorService.getBeveragesDescription()">
-    <beverage-card beverage="beverage"></beverage-card>
+    <beverage-card [beverage]="beverage"></beverage-card>
   </div>
 
 </div>
