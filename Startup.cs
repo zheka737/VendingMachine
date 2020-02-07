@@ -43,7 +43,7 @@ namespace VendingMachine
 
             services.AddDbContext<DbVendingMachineContext>(options =>
             {
-                options.UseSqlServer(@$"Data Source=localhost\SQLEXPRESS;DataBase=VendingMachineDB;Integrated Security=True;Connect Timeout=30;AttachDbFilename={MDF_Directory}");
+                
             });
 
             SeedDB(services.BuildServiceProvider().GetService<DbVendingMachineContext>());

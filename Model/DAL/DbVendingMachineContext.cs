@@ -8,6 +8,10 @@ namespace VendingMachine.Model.DAL
 
         public DbVendingMachineContext(DbContextOptions options): base(options) {}
 
+        public DbVendingMachineContext()
+        {
+        }
+
         public DbSet<BeverageStore> BeverageStores { get; set; }
 
         public DbSet<BeverageType> BeverageTypes { get; set; }
@@ -20,9 +24,12 @@ namespace VendingMachine.Model.DAL
 
 
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseSqlServer(
+                @$"Data Source=localhost\SQLEXPRESS;DataBase=VendingMachineDB;Integrated Security=True;Connect Timeout=30;AttachDbFilename={Startup.MDF_Directory}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {

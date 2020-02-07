@@ -13,6 +13,8 @@ import { BeverageCardComponent } from "./components/beverageSelector/beverageCar
 import { BeverageSelectorService } from "./services/beverageSelector.service";
 import { BeveragesDescriptionRepository } from "./model/beverageDescription.repository";
 import { RestDataSource } from "./model/rest.datasource";
+import { CoinboxService } from "./services/coinbox.service";
+import { CoinRepository } from "./model/coin.repository";
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { RestDataSource } from "./model/rest.datasource";
     BeverageSelectorService,
     RestDataSource,
     BeveragesDescriptionRepository,
-    CoinboxService
+    CoinboxService,
+    CoinRepository
   ],
   bootstrap: [AppComponent]
 })
