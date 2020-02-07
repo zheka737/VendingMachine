@@ -1,26 +1,22 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { BeverageDescription } from "src/app/model/beverageDescription.model";
 
-
-
 @Component({
-  selector: 'beverage-card',
+  selector: "beverage-card",
   templateUrl: "beverageCard.component.html"
 })
 export class BeverageCardComponent {
-
   @Input()
   private beverage: BeverageDescription;
 
   @Output()
-  onBeverageSelection: EventEmitter<BeverageDescription> = new EventEmitter();
+  onBeverageSelected: EventEmitter<BeverageDescription> = new EventEmitter();
 
-  constructor() {
+  constructor() {}
 
+  onSelectionChange(event) {
+    if(event.target.checked) {
+      this.onBeverageSelected.emit(this.beverage);
+    }
   }
-
-  onSelectionChange() {
-
-  }
-
 }
