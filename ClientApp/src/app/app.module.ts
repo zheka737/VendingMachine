@@ -8,10 +8,7 @@ import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { VendingMachinePanelComponent } from "./components/vendingMachinePanel/vendingMachinePanel.component";
 import { AppStateControlService } from "./services/appStateControl.service";
-import { BeverageIsReadyToBeTakenStateService } from "./services/states/beverageIsReadyToBeTakenState.service";
-import { GettingBeverageReadyStateService } from "./services/states/gettingBeverageReadyState.service";
-import { GiveChangeStateService } from "./services/states/giveChangeState.service";
-import { MainStateService } from "./services/states/mainState.service";
+
 
 @NgModule({
   declarations: [AppComponent, VendingMachinePanelComponent],
@@ -26,11 +23,6 @@ import { MainStateService } from "./services/states/mainState.service";
   ],
   providers: [
     AppStateControlService,
-    MainStateService,
-    GettingBeverageReadyStateService,
-    BeverageIsReadyToBeTakenStateService,
-    GiveChangeStateService,
-
   ],
   bootstrap: [AppComponent]
 })
