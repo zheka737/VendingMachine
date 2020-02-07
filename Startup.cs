@@ -46,6 +46,8 @@ namespace VendingMachine
                 
             });
 
+            services.AddSingleton(typeof(CoinboxService));
+
             SeedDB(services.BuildServiceProvider().GetService<DbVendingMachineContext>());
         }
 

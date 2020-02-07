@@ -1,4 +1,5 @@
 <div>
-  <button type="button" class="btn btn-light">1</button>
-
+    <div *ngFor="let coinType of coinBoxService.getCoinsDescription()">
+        <button type="button" class="btn btn-light" (click)="onCoinClick(coinType.nominal)">{{coinType.nominal}}</button>
+    </div>
 </div>

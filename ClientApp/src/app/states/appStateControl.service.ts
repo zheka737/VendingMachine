@@ -6,6 +6,8 @@ import { GettingBeverageReadyState } from "./gettingBeverageReadyState";
 import { BeverageIsReadyToBeTakenState } from "./beverageIsReadyToBeTakenState";
 import { BeveragesDescriptionRepository } from "../model/beverageDescription.repository";
 import { CoinRepository } from "../model/coin.repository";
+import { CoinboxService } from "../services/coinbox.service";
+import { DisplayService, DisplayState } from "../services/display.service";
 
 @Injectable()
 export class AppStateControlService {
@@ -13,11 +15,20 @@ export class AppStateControlService {
 
   constructor(
     private beverageDescriptionRepository: BeveragesDescriptionRepository,
-    private coinRepository: CoinRepository
+    private coinboxService: CoinboxService,
+    private displayService: DisplayService
   ) {
-    this.coinRepository.loadCoinsDescription();
+
+    this.coinboxService.loadCoinsDescription();
+    this.coinboxService.updateCurrentCoinBasketValue();
+    this.displayService.setDisplayState(DisplayState.Order);
     this.setMainState();
   }
+
+  makeOrder() {
+    
+  }
+
 
   setState(newState: IState) {
     this.state = newState;

@@ -15,5 +15,13 @@ export class RestDataSource {
     getCoinsDescription(): Observable<CoinTypeDescription[]> {
       return this.http.get<CoinTypeDescription[]>("/api/get-coins-description");
     }
+
+    putCoinToCoinBasket(coinNominal: number) {
+      return this.http.post("/api/put-coin-in-coin-basket", coinNominal);
+    }
+
+    getTotalCoinBasketValue(): Observable<number> {
+      return this.http.get<number>("/api/get-total-coin-basket-value");
+    }
 }
 

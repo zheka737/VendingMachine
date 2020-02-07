@@ -15,10 +15,14 @@ import { BeveragesDescriptionRepository } from "./model/beverageDescription.repo
 import { RestDataSource } from "./model/rest.datasource";
 import { CoinboxService } from "./services/coinbox.service";
 import { CoinRepository } from "./model/coin.repository";
+import { CoinboxComponent } from "./components/coinbox/coinbox.component";
+import { DisplayService } from "./services/display.service";
+import { DisplayComponent } from "./components/display/display.component";
 
 
 @NgModule({
-  declarations: [AppComponent, VendingMachinePanelComponent, BeverageSelectorComponent, BeverageCardComponent],
+  declarations: [AppComponent, VendingMachinePanelComponent, BeverageSelectorComponent,
+     BeverageCardComponent, CoinboxComponent, DisplayComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
@@ -34,8 +38,9 @@ import { CoinRepository } from "./model/coin.repository";
     RestDataSource,
     BeveragesDescriptionRepository,
     CoinboxService,
-    CoinRepository
+    CoinRepository,
+    DisplayService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

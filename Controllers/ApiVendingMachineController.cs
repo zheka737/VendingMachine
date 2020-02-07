@@ -36,6 +36,8 @@ namespace VendingMachine.Controllers {
             }).ToListAsync();
         }
 
+        
+
     }
 
 }

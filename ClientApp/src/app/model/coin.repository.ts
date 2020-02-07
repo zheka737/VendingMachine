@@ -6,6 +6,7 @@ import { CoinTypeDescription } from "./coinTypeDescription.model";
 export class CoinRepository {
 
   private _coinsDescription: CoinTypeDescription[] = [];
+  private _currentCoinBasketValue: number;
 
   constructor(private datasourse: RestDataSource) {}
 
@@ -15,8 +16,24 @@ export class CoinRepository {
     });
   }
 
-  get coinsDescription() {
-    return this.coinsDescription;
+  get coinsDescription(): CoinTypeDescription[] {
+    return this._coinsDescription;
+  }
+
+  putCoinInCoinBasket(coinNominal: number): void {
+    this.datasourse.putCoinToCoinBasket(coinNominal).subscribe(() => {
+      this.updateCurrentCoinBasketValue();
+    });
+  }
+
+  updateCurrentCoinBasketValue() {
+    this.datasourse.getTotalCoinBasketValue().subscribe(data => {
+      this._currentCoinBasketValue = data;
+    });
+  }
+
+  get currentCoinBasketValue() {
+    return this._currentCoinBasketValue;
   }
 
 }
