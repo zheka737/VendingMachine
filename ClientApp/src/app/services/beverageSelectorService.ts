@@ -10,4 +10,9 @@ export class BeverageSelectorService {
   getBeveragesDescription(): BeverageDescription[] {
     return this.beveragesDescriptionRepository.getBeverageDescriptions();
   }
+
+  selectBeverage(beverage: BeverageDescription) {
+    this.getBeveragesDescription().forEach(e => e.selected = false);
+    beverage.selected = true;
+  }
 }
