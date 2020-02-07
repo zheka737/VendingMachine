@@ -11,7 +11,7 @@ export class BeveragesDescriptionRepository {
 
     }
 
-    loadBeverageDescriptions() {
+    updateBeverageDescriptions() {
         this.datasourse.getBeveragesDescription().subscribe(data => {
             this.beveragesDescription = data;
         })
@@ -19,5 +19,5 @@ export class BeveragesDescriptionRepository {
 
     getBeverageDescriptions() {
         return this.beveragesDescription;
-    } 
+    }
 }

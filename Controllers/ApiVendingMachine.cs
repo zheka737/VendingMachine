@@ -8,17 +8,17 @@ using VendingMachine.Model.DTO;
 
 namespace VendingMachine.Controllers {
 
-    [Route("api")]
-    public class ApiVendingMachine
+    [ApiController]
+    public class ApiVendingMachineController: ControllerBase
     {
         public DbVendingMachineContext db { get; }
-        public ApiVendingMachine(DbVendingMachineContext db)
+        public ApiVendingMachineController(DbVendingMachineContext db)
         {
             this.db = db;
         }
 
 
-        [HttpGet, Route("get-beverages-description")]
+        [HttpGet, Route("api/get-beverages-description")]
         public async Task<List<BeverageDescriptionDTO>> GetBeveragesDescription() {
             return await db.BeverageTypes.Select(e => new BeverageDescriptionDTO {
                 Name = e.Name,

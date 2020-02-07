@@ -1,5 +1,5 @@
 import { IState } from "./state";
-import { AppStateControlService } from "../services/appStateControl.service";
+import { AppStateControlService } from "./appStateControl.service";
 import { Injectable } from "@angular/core";
 
 export class GiveChangeState implements IState {

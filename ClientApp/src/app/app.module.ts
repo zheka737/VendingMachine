@@ -7,11 +7,16 @@ import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { VendingMachinePanelComponent } from "./components/vendingMachinePanel/vendingMachinePanel.component";
-import { AppStateControlService } from "./services/appStateControl.service";
+import { AppStateControlService } from "./states/appStateControl.service";
+import { BeverageSelectorComponent } from "./components/beverageSelector/beverageSelector.component";
+import { BeverageCardComponent } from "./components/beverageSelector/beverageCard/beverageCard.component";
+import { BeverageSelectorService } from "./services/beverageSelectorService";
+import { BeveragesDescriptionRepository } from "./model/beverageDescription.repository";
+import { RestDataSource } from "./model/rest.datasource";
 
 
 @NgModule({
-  declarations: [AppComponent, VendingMachinePanelComponent],
+  declarations: [AppComponent, VendingMachinePanelComponent, BeverageSelectorComponent, BeverageCardComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
@@ -23,6 +28,9 @@ import { AppStateControlService } from "./services/appStateControl.service";
   ],
   providers: [
     AppStateControlService,
+    BeverageSelectorService,
+    RestDataSource,
+    BeveragesDescriptionRepository
   ],
   bootstrap: [AppComponent]
 })

@@ -49,9 +49,6 @@ namespace VendingMachine.Migrations
                     b.Property<int>("Cost")
                         .HasColumnType("int");
 
-                    b.Property<byte>("Image")
-                        .HasColumnType("tinyint");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 

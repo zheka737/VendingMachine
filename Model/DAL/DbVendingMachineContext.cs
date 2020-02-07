@@ -38,6 +38,8 @@ namespace VendingMachine.Model.DAL
                 entity.HasOne(e => e.CoinType).WithOne(o => o.CoinVault).HasForeignKey<CoinVault>(e => e.CoinTypeId);;
 
             });
+
+            modelBuilder.Entity<BeverageType>(entity => entity.Ignore(e => e.Image));
         }
     }
 

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AppStateControlService } from "../services/appStateControl.service";
+import { AppStateControlService } from "./appStateControl.service";
 import { IState } from "./state";
 
 export class GettingBeverageReadyState implements IState {
