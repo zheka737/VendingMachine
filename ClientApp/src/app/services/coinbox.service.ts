@@ -8,6 +8,7 @@ export class CoinboxService {
 
   returnModey() {
     this.coinRepository.getChange();
+    this.updateCurrentCoinBasketValue();
   }
 
   loadCoinsDescription() {

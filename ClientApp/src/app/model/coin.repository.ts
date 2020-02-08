@@ -44,6 +44,10 @@ export class CoinRepository {
     this.datasourse.getChange().subscribe(
       data => {
         this._returnedChangeCoins = data;
+
+        this.returnedChangeCoins.forEach(e => {
+          console.log(e.nominal);
+        });
       },
       error => {
         console.log(error);

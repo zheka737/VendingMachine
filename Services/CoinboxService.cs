@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using VendingMachine.Infrastructure;
 using VendingMachine.Model;
 using VendingMachine.Model.DAL;
+using VendingMachine.Model.DTO;
 
 namespace VendingMachine {
 
@@ -61,9 +62,12 @@ namespace VendingMachine {
             List<CoinVault> coinVaults = await db.CoinVaults.Where(e => e.Count != 0).OrderByDescending(e => e.CoinType.Nominal).ToListAsync();
 
             foreach(CoinVault coinVault in coinVaults) {
-                while(coinVault.CoinType.Nominal >= changeValue){
-                    await ExtractCoinFromVaultAndPutItInCoinBasketAsync(coinVault.CoinType.Nominal);
-                    changeValue -= coinVault.CoinType.Nominal;
+                while(coinVault.CoinType.Nominal <= changeValue){
+                    if(coinVault.Count > 0) {
+                        await ExtractCoinFromVaultAndPutItInCoinBasketAsync(coinVault.CoinType.Nominal);
+                        changeValue -= coinVault.CoinType.Nominal;
+                    }
+                        
                 }
             }
 
@@ -102,15 +106,22 @@ namespace VendingMachine {
             await db.SaveChangesAsync();
         }
 
-        public async Task<List<CoinInBasket>> GiveChange() {
+        public async Task<List<CoinTypeDescriptionDTO>> GiveChange() {
+
+            List<CoinTypeDescriptionDTO> result;
 
             List<CoinInBasket> coinInBasket = await db.CoinsInBasket.Select(e => e).ToListAsync();
+
+            result = coinInBasket.Select(e => new CoinTypeDescriptionDTO {
+                Nominal = e.CoinType.Nominal,
+                Blocked = e.CoinType.CoinTypeSettings.Blocked
+            }).ToList();
 
             db.CoinsInBasket.RemoveRange(coinInBasket);
 
             await db.SaveChangesAsync();
 
-            return coinInBasket;
+            return result;
         }
     }
 

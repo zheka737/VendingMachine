@@ -3,7 +3,7 @@ namespace VendingMachine.Model.DTO
 
     public class BeverageDescriptionDTO
     {
-        public int BeveregeTypeId { get; set; }
+        public int BeverageTypeId { get; set; }
         public string Name { get; set; }
 
         public byte[] Image { get; set; }

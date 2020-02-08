@@ -25,7 +25,7 @@ namespace VendingMachine.Controllers {
         [HttpGet, Route("api/get-beverages-description")]
         public async Task<List<BeverageDescriptionDTO>> GetBeveragesDescription() {
             return await db.BeverageTypes.Select(e => new BeverageDescriptionDTO {
-                BeveregeTypeId = e.Id,
+                BeverageTypeId = e.Id,
                 Name = e.Name,
                 Cost = e.Cost,
                 Image = e.Image,

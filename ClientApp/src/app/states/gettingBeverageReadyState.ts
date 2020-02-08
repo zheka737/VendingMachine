@@ -4,6 +4,7 @@ import { IState } from "./state";
 import { DisplayService } from "../services/display.service";
 import { RestDataSource } from "../model/rest.datasource";
 import { BeverageSelectorService } from "../services/beverageSelector.service";
+import { BeverageDescription } from "../model/beverageDescription.model";
 
 @Injectable()
 export class GettingBeverageReadyState implements IState {
@@ -15,22 +16,19 @@ export class GettingBeverageReadyState implements IState {
   ) {}
 
   Execute(): void {
-    this.restDataSource
-      .orderBeverage(
-        this.beverageSelectorService.getCurrentlySelectedBeverage()
-          .beverageTypeId
-      )
-      .subscribe(
-        () => {
-          this.displayService.showMessage("Напиток готовится, подождите...");
+    let beverageType: BeverageDescription = this.beverageSelectorService.getCurrentlySelectedBeverage();
 
-          setTimeout(() => {
-            this.appStateControlService.setBeverageIsReadyToBeTakenState();
-          }, 2000);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    this.restDataSource.orderBeverage(beverageType.beverageTypeId).subscribe(
+      () => {
+        this.displayService.showMessage("Напиток готовится, подождите...");
+
+        setTimeout(() => {
+          this.appStateControlService.setBeverageIsReadyToBeTakenState();
+        }, 2000);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

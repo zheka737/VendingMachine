@@ -31,9 +31,7 @@ namespace VendingMachine.Controllers {
 
         [HttpPost, Route("api/get-change")]
         public async Task<List<CoinTypeDescriptionDTO>> GetChange() {
-            return (await CoinboxService.GiveChange()).Select(e => new CoinTypeDescriptionDTO {
-
-            }).ToList();
+            return await CoinboxService.GiveChange();
         }
     }
 
