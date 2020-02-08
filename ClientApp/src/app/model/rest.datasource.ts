@@ -6,22 +6,31 @@ import { CoinTypeDescription } from "./coinTypeDescription.model";
 
 @Injectable()
 export class RestDataSource {
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-    getBeveragesDescription(): Observable<BeverageDescription[]> {
-        return this.http.get<BeverageDescription[]>("/api/get-beverages-description")
-    }
+  getBeveragesDescription(): Observable<BeverageDescription[]> {
+    return this.http.get<BeverageDescription[]>(
+      "/api/get-beverages-description"
+    );
+  }
 
-    getCoinsDescription(): Observable<CoinTypeDescription[]> {
-      return this.http.get<CoinTypeDescription[]>("/api/get-coins-description");
-    }
+  getCoinsDescription(): Observable<CoinTypeDescription[]> {
+    return this.http.get<CoinTypeDescription[]>("/api/get-coins-description");
+  }
 
-    putCoinToCoinBasket(coinNominal: number) {
-      return this.http.post("/api/put-coin-in-coin-basket", coinNominal);
-    }
+  putCoinToCoinBasket(coinNominal: number): Observable<Object> {
+    return this.http.post("/api/put-coin-in-coin-basket", coinNominal);
+  }
 
-    getTotalCoinBasketValue(): Observable<number> {
-      return this.http.get<number>("/api/get-total-coin-basket-value");
-    }
+  getTotalCoinBasketValue(): Observable<number> {
+    return this.http.get<number>("/api/get-total-coin-basket-value");
+  }
+
+  orderBeverage(beverageTypeId: number): Observable<Object> {
+    return this.http.post("/api/order-beverage", beverageTypeId);
+  }
+
+  getChange(): Observable<CoinTypeDescription[]> {
+    return this.http.post<CoinTypeDescription[]>("/api/get-change", null);
+  }
 }
-

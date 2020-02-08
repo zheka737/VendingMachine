@@ -25,6 +25,7 @@ namespace VendingMachine.Controllers {
         [HttpGet, Route("api/get-beverages-description")]
         public async Task<List<BeverageDescriptionDTO>> GetBeveragesDescription() {
             return await db.BeverageTypes.Select(e => new BeverageDescriptionDTO {
+                BeveregeTypeId = e.Id,
                 Name = e.Name,
                 Cost = e.Cost,
                 Image = e.Image,
@@ -40,8 +41,8 @@ namespace VendingMachine.Controllers {
             }).ToListAsync();
         }
 
-        [HttpPost, Route("api/order-made")]
-        public async Task OrderMade([FromBody]int beverageTypeId) {
+        [HttpPost, Route("api/order-beverage")]
+        public async Task OrderBeverage([FromBody]int beverageTypeId) {
             BeverageType beverageType = await db.BeverageTypes.SingleAsync(e => e.Id == beverageTypeId);
 
             if(CoinboxService.TotalCoinBasketValue() < beverageType.Cost) {

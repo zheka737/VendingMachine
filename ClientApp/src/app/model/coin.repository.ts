@@ -4,9 +4,9 @@ import { CoinTypeDescription } from "./coinTypeDescription.model";
 
 @Injectable()
 export class CoinRepository {
-
   private _coinsDescription: CoinTypeDescription[] = [];
   private _currentCoinBasketValue: number;
+  private _returnedChangeCoins: CoinTypeDescription[] = [];
 
   constructor(private datasourse: RestDataSource) {}
 
@@ -14,6 +14,10 @@ export class CoinRepository {
     this.datasourse.getCoinsDescription().subscribe(data => {
       this._coinsDescription = data;
     });
+  }
+
+  get returnedChangeCoins(): CoinTypeDescription[] {
+    return this._returnedChangeCoins;
   }
 
   get coinsDescription(): CoinTypeDescription[] {
@@ -36,4 +40,14 @@ export class CoinRepository {
     return this._currentCoinBasketValue;
   }
 
+  getChange() {
+    this.datasourse.getChange().subscribe(
+      data => {
+        this._returnedChangeCoins = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

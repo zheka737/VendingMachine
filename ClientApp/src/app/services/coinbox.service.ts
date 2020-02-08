@@ -4,10 +4,10 @@ import { CoinTypeDescription } from "../model/coinTypeDescription.model";
 
 @Injectable()
 export class CoinboxService {
+  constructor(private coinRepository: CoinRepository) {}
 
-  constructor(private coinRepository: CoinRepository) {
-
-
+  returnModey() {
+    this.coinRepository.getChange();
   }
 
   loadCoinsDescription() {
@@ -20,7 +20,6 @@ export class CoinboxService {
 
   putCoinInCoinBasket(coinNominal: number): void {
     this.coinRepository.putCoinInCoinBasket(coinNominal);
-    
   }
 
   getCurrentCoinBasketValue(): number {
@@ -30,5 +29,4 @@ export class CoinboxService {
   updateCurrentCoinBasketValue() {
     this.coinRepository.updateCurrentCoinBasketValue();
   }
-
 }
