@@ -56,6 +56,13 @@ namespace VendingMachine.Controllers {
             await CoinboxService.SellBeverage(beverageType);
         }
 
+        [Route("api/beverages/{id:int}/image")]
+        public async Task<string> GetImageAsync(int id) {
+            BeverageType beverageType = await db.BeverageTypes.SingleAsync(e => e.Id == id);
+
+            return System.Convert.ToBase64String(beverageType.Image);
+        }
+
     }
 
 }

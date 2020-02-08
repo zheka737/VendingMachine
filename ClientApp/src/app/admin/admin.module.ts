@@ -24,9 +24,8 @@ let routing = RouterModule.forChild([
 
 @NgModule({
   imports: [CommonModule, FormsModule, routing],
-  exports: [AddEditBeverageModalContent],
-  declarations: [AdminBeveragesComponent, AdminCoinsComponent, AdminComponent, AddEditBeverageModalContent],
+  declarations: [AdminBeveragesComponent, AdminCoinsComponent, AdminComponent],
   providers: [AdminRestDataSource, AdminRepository],
-  entryComponents: [AddEditBeverageModalContent]
+
 })
 export class AdminModule {}

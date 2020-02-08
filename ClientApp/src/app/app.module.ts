@@ -24,6 +24,8 @@ import { GiveChangeState } from "./states/giveChangeState";
 import { MakeOrderState } from "./states/makeOrderState";
 import { ContextualHelpService } from "./services/contextualHelp.service";
 import { ContextualHelpComponent } from "./components/contextualHelp/contextualHelp.component";
+import { AddEditBeverageModalContent } from "./admin/components/addEditBeverageModal.component";
+import { ProfileImageDirective } from "./directives/beverageImage.directive";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ContextualHelpComponent } from "./components/contextualHelp/contextualH
     BeverageCardComponent,
     CoinboxComponent,
     DisplayComponent,
-    ContextualHelpComponent
+    ContextualHelpComponent,
+    AddEditBeverageModalContent,
+    ProfileImageDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -59,6 +63,7 @@ import { ContextualHelpComponent } from "./components/contextualHelp/contextualH
     MakeOrderState,
     ContextualHelpService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddEditBeverageModalContent]
 })
 export class AppModule {}

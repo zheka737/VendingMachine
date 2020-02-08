@@ -1,3 +1,4 @@
 <div>
-    <button (click)="test()"></button>
+    <img [beverage-image]="beverage.id">
+    <input #file type="file" (change)="uploadBeverageImage(file.files)" />
 </div>

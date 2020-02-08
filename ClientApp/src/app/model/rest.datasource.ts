@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpRequest } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { BeverageDescription } from "./beverageDescription.model";
 import { CoinTypeDescription } from "./coinTypeDescription.model";
@@ -32,5 +32,22 @@ export class RestDataSource {
 
   getChange(): Observable<CoinTypeDescription[]> {
     return this.http.post<CoinTypeDescription[]>("/api/get-change", null);
+  }
+
+  getBeverageImage(beverageTypeId) {
+    return this.http.get(`api/beverages/${beverageTypeId}/image`);
+  }
+
+  uploadBeverageImage(file, beverageTypeId: number) {
+
+    const formData = new FormData();
+
+    formData.append(file.name, file);
+
+    const uploadReq = new HttpRequest('POST', `api/admin/beverage/${beverageTypeId}/add-update-beverage-image`, formData);
+
+    this.http.request(uploadReq).subscribe(event => {
+      console.log("Успешно загружено");
+    });
   }
 }
