@@ -18,11 +18,20 @@ import { CoinRepository } from "./model/coin.repository";
 import { CoinboxComponent } from "./components/coinbox/coinbox.component";
 import { DisplayService } from "./services/display.service";
 import { DisplayComponent } from "./components/display/display.component";
-
+import { BeverageIsReadyToBeTakenState } from "./states/beverageIsReadyToBeTakenState";
+import { GettingBeverageReadyState } from "./states/gettingBeverageReadyState";
+import { GiveChangeState } from "./states/giveChangeState";
+import { MakeOrderState } from "./states/makeOrderState";
 
 @NgModule({
-  declarations: [AppComponent, VendingMachinePanelComponent, BeverageSelectorComponent,
-     BeverageCardComponent, CoinboxComponent, DisplayComponent],
+  declarations: [
+    AppComponent,
+    VendingMachinePanelComponent,
+    BeverageSelectorComponent,
+    BeverageCardComponent,
+    CoinboxComponent,
+    DisplayComponent
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
@@ -39,8 +48,12 @@ import { DisplayComponent } from "./components/display/display.component";
     BeveragesDescriptionRepository,
     CoinboxService,
     CoinRepository,
-    DisplayService
+    DisplayService,
+    BeverageIsReadyToBeTakenState,
+    GettingBeverageReadyState,
+    GiveChangeState,
+    MakeOrderState
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

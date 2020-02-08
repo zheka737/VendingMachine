@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IState } from "./state";
-import { MainState } from "./mainState";
+import { MakeOrderState } from "./makeOrderState";
 import { GiveChangeState } from "./giveChangeState";
 import { GettingBeverageReadyState } from "./gettingBeverageReadyState";
 import { BeverageIsReadyToBeTakenState } from "./beverageIsReadyToBeTakenState";
@@ -12,16 +12,14 @@ import { DisplayService, DisplayState } from "../services/display.service";
 @Injectable()
 export class AppStateControlService {
   private state: IState = null;
+  beverageIsReadyToBeTakenState: BeverageIsReadyToBeTakenState;
+  gettingBeverageReadyState: GettingBeverageReadyState;
+  giveChangeState: GiveChangeState;
+  makeOrderState: MakeOrderState;
 
-  constructor(
-    private beverageDescriptionRepository: BeveragesDescriptionRepository,
-    private coinboxService: CoinboxService,
-    private displayService: DisplayService
-  ) {
+  constructor() {}
 
-    this.coinboxService.loadCoinsDescription();
-    this.coinboxService.updateCurrentCoinBasketValue();
-    this.displayService.setDisplayState(DisplayState.Order);
+  bootstrap() {
     this.setMainState();
   }
 
@@ -29,29 +27,24 @@ export class AppStateControlService {
     this.setGettingBeverageReadyState();
   }
 
-
   setState(newState: IState) {
     this.state = newState;
     this.state.Execute();
   }
 
   setMainState() {
-    this.setState(new MainState(this));
+    this.setState(this.makeOrderState);
   }
 
   setGiveChangeState() {
-    this.setState(new GiveChangeState(this));
+    this.setState(this.giveChangeState);
   }
 
   setGettingBeverageReadyState() {
-    this.setState(new GettingBeverageReadyState(this));
+    this.setState(this.gettingBeverageReadyState);
   }
 
   setBeverageIsReadyToBeTakenState() {
-    this.setState(new BeverageIsReadyToBeTakenState(this));
-  }
-
-  updateBeverageDescriptions() {
-    this.beverageDescriptionRepository.updateBeverageDescriptions();
+    this.setState(this.beverageIsReadyToBeTakenState);
   }
 }
