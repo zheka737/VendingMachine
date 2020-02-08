@@ -40,6 +40,7 @@ import { ContextualHelpComponent } from "./components/contextualHelp/contextualH
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      { path: "admin", loadChildren: "./admin/admin.module#AdminModule" },
       { path: "", component: VendingMachinePanelComponent, pathMatch: "full" }
     ]),
     NgbModule
