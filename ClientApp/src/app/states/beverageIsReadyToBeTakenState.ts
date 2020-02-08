@@ -7,6 +7,6 @@ export class BeverageIsReadyToBeTakenState implements IState {
   constructor(private appStateControlService: AppStateControlService) {}
 
   Execute(): void {
-    throw new Error("Method not implemented.");
+    //throw new Error("Method not implemented.");
   }
 }

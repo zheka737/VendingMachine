@@ -3,52 +3,51 @@ import { AppStateControlService } from "../states/appStateControl.service";
 
 @Injectable()
 export class DisplayService {
+  private _displayState: DisplayState;
+  private _message: string;
+  private _notification: string;
 
-    private _displayState: DisplayState;
-    private _message: string;
-    private _notification: string;
+  constructor(private appStateControlService: AppStateControlService) {}
 
-    constructor(private appStateControlService: AppStateControlService){}
+  get message() {
+    return this._message;
+  }
 
+  get notification() {
+    return this._notification;
+  }
 
-    get message() {
-        return this._message;
-    }
+  get displayState(): DisplayState {
+    return this._displayState;
+  }
 
-    get notification() {
-        return this._notification;
-    }
+  setDisplayState(state: DisplayState) {
+    this._displayState = state;
+  }
 
-    get displayState(): DisplayState {
-        return this._displayState;
-    }
+  showMessage(message: string) {
+    this._message = message;
+    this.setDisplayState(DisplayState.Message);
+  }
 
-    setDisplayState(state: DisplayState) {
-        this._displayState = state;
-    } 
+  showNotification(message: string) {
+    let previousState: DisplayState = this.displayState;
+    this._notification = message;
+    this.setDisplayState(DisplayState.Notificcation);
 
-    showMessage(message: string){
-        this._message = message;
-        this.setDisplayState(DisplayState.Message);
-    }  
-    
-    showNotification(message: string) {
-        let previousState: DisplayState = this.displayState;
-        this._notification = message;
-        this.setDisplayState(DisplayState.Notificcation);
+    setTimeout(() => {
+      this.setDisplayState(previousState);
+    }, 2000);
+  }
 
-        setTimeout(() => {
-            this.setDisplayState(previousState);
-        }, 2000)
-    }
-
-    makeOrder() {
-        this.appStateControlService.makeOrder();
-    }
+  orderMade() {
+    this.appStateControlService.orderMade();
+  }
 }
 
 export enum DisplayState {
-    Order = 1,
-    Message = 2,
-    Notificcation = 3
+  Order = 1,
+  Message = 2,
+  Notificcation = 3,
+  TakeBeverage = 4
 }

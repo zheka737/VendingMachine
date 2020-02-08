@@ -23,7 +23,7 @@ export class AppStateControlService {
     this.setMainState();
   }
 
-  makeOrder() {
+  orderMade() {
     this.setGettingBeverageReadyState();
   }
 

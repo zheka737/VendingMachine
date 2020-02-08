@@ -6,30 +6,31 @@ import { BeverageSelectorService } from "src/app/services/beverageSelector.servi
 import { BeverageDescription } from "src/app/model/beverageDescription.model";
 
 @Component({
-    selector: "display",
-    templateUrl: "display.component.html"
+  selector: "display",
+  templateUrl: "display.component.html"
 })
 export class DisplayComponent {
+  constructor(
+    private appStateControlService: AppStateControlService,
+    private displayService: DisplayService,
+    private coinboxService: CoinboxService,
+    private beverageSelectorService: BeverageSelectorService
+  ) {}
 
+  onOrderMadeButtonClick() {
+    this.appStateControlService.orderMade();
+  }
 
-    constructor(private displayService: DisplayService, private coinboxService: CoinboxService,
-        private beverageSelectorService: BeverageSelectorService) {
+  checkThatBeverageIsSelected(): boolean {
+    return !!this.beverageSelectorService.getCurrentlySelectedBeverage();
+  }
 
-    }
+  checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage() {
+    let selectedBeverage: BeverageDescription = this.beverageSelectorService.getCurrentlySelectedBeverage();
 
-    onMakeOrderButtonClick() {
-        this
-    }
-
-    checkThatBeverageIsSelected(): boolean {
-        return !!this.beverageSelectorService.getCurrentlySelectedBeverage();
-    }
-
-    checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage() {
-
-        let selectedBeverage: BeverageDescription = this.beverageSelectorService.getCurrentlySelectedBeverage();
-
-        return !!selectedBeverage && selectedBeverage.cost <= this.coinboxService.getCurrentCoinBasketValue();
-    }
+    return (
+      !!selectedBeverage &&
+      selectedBeverage.cost <= this.coinboxService.getCurrentCoinBasketValue()
+    );
+  }
 }
-

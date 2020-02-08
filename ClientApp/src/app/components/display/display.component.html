@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="row">
-                <button type="button" class="btn btn-primary" (click)="onMakeOrderButtonClick()" [disabled]="!checkThatBeverageIsSelected() || !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">Купить</button>
+                <button type="button" class="btn btn-primary" (click)="onOrderMadeButtonClick()" [disabled]="!checkThatBeverageIsSelected() || !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">Купить</button>
             </div>
         </div>
     </div>
@@ -26,5 +26,8 @@
     </div>
     <div *ngIf="displayService.displayState == 3">
         <span>{{displayService.notification}}</span>
+    </div>
+    <div *ngIf="displayService.displayState == 4">
+        <span>Заберите напиток</span>
     </div>
 </div>
