@@ -28,7 +28,6 @@ namespace VendingMachine.Controllers {
                 BeverageTypeId = e.Id,
                 Name = e.Name,
                 Cost = e.Cost,
-                Image = e.Image,
                 Available = e.BeverageStore.Quantity > 0
             }).ToListAsync();
         }
@@ -60,7 +59,13 @@ namespace VendingMachine.Controllers {
         public async Task<string> GetImageAsync(int id) {
             BeverageType beverageType = await db.BeverageTypes.SingleAsync(e => e.Id == id);
 
-            return System.Convert.ToBase64String(beverageType.Image);
+            if(beverageType.Image != default) {
+                return System.Convert.ToBase64String(beverageType.Image);
+            }
+            else {
+                return "";
+            }
+
         }
 
     }
