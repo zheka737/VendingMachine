@@ -18,7 +18,7 @@ namespace VendingMachine.Controllers {
 
         [HttpPost, Route("api/put-coin-in-coin-basket")]
         public void PutCoinInCoinBasket([FromBody]int coinNominal) {
-            CoinboxService.PutCoin(db.CoinTypes.Single(e => e.Nominal == coinNominal));
+            CoinboxService.PutCoin(db.CoinTypes.Single(e => e.Nominal == coinNominal).Nominal);
         }
 
         [HttpGet, Route("api/get-total-coin-basket-value")]

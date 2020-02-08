@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,9 +13,12 @@ namespace VendingMachine.Controllers {
     public class ApiVendingMachineController: ControllerBase
     {
         public DbVendingMachineContext db { get; }
-        public ApiVendingMachineController(DbVendingMachineContext db)
+        public CoinboxService CoinboxService { get; }
+
+        public ApiVendingMachineController(DbVendingMachineContext db, CoinboxService coinboxService)
         {
             this.db = db;
+            CoinboxService = coinboxService;
         }
 
 
@@ -36,7 +40,20 @@ namespace VendingMachine.Controllers {
             }).ToListAsync();
         }
 
-        
+        [HttpPost, Route("api/order-made")]
+        public async Task OrderMade([FromBody]int beverageTypeId) {
+            BeverageType beverageType = await db.BeverageTypes.SingleAsync(e => e.Id == beverageTypeId);
+
+            if(CoinboxService.TotalCoinBasketValue() < beverageType.Cost) {
+                throw new ApplicationException("Недостаточно средств для выдачи напитка");
+            }
+
+            if(beverageType.BeverageStore.Quantity == 0) {
+                throw new ApplicationException("Напиток закончился");
+            }
+
+            await CoinboxService.SellBeverage(beverageType);
+        }
 
     }
 

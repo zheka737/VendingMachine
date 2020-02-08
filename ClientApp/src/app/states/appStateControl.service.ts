@@ -20,7 +20,7 @@ export class AppStateControlService {
   constructor() {}
 
   bootstrap() {
-    this.setMainState();
+    this.setMakeOrderState();
   }
 
   orderMade() {
@@ -32,7 +32,15 @@ export class AppStateControlService {
     this.state.Execute();
   }
 
-  setMainState() {
+  continuePurchases() {
+    this.setMakeOrderState();
+  }
+
+  takeChange() {
+    this.setGiveChangeState();
+  }
+
+  setMakeOrderState() {
     this.setState(this.makeOrderState);
   }
 

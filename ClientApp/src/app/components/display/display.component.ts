@@ -21,6 +21,14 @@ export class DisplayComponent {
     this.appStateControlService.orderMade();
   }
 
+  onContinuePurchasesButtonClick() {
+    this.appStateControlService.continuePurchases();
+  }
+
+  onTakeChangeButtonPressed() {
+    this.appStateControlService.takeChange();
+  }
+
   checkThatBeverageIsSelected(): boolean {
     return !!this.beverageSelectorService.getCurrentlySelectedBeverage();
   }

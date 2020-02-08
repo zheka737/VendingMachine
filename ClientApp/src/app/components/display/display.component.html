@@ -29,5 +29,8 @@
     </div>
     <div *ngIf="displayService.displayState == 4">
         <span>Заберите напиток</span>
+        <button type="button" class="btn btn-primary" (click)="onContinuePurchasesButtonClick()">Продолжить покупки</button>
+        <button type="button" class="btn btn-secondary" *ngIf="!coinboxService.getCurrentCoinBasketValue()==0" (click)="onTakeChangeButtonPressed()">Забрать
+      сдачу</button>
     </div>
 </div>
