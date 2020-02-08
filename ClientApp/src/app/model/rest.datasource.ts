@@ -35,7 +35,7 @@ export class RestDataSource {
   }
 
   getBeverageImage(beverageTypeId) {
-    return this.http.get(`api/beverages/${beverageTypeId}/image`);
+    return this.http.get(`api/beverages/${beverageTypeId}/image`, { responseType: 'text' });
   }
 
   uploadBeverageImage(file, beverageTypeId: number) {

@@ -46,7 +46,7 @@ namespace VendingMachine.Model.DAL
 
             });
 
-            modelBuilder.Entity<BeverageType>(entity => entity.Ignore(e => e.Image));
+            //modelBuilder.Entity<BeverageType>(entity => entity.Ignore(e => e.Image));
 
             modelBuilder.Entity<CoinInBasket>(entity => {
                 entity.HasOne(e => e.CoinType).WithMany().HasForeignKey(e => e.CoinTypeId);

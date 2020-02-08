@@ -27,6 +27,7 @@ import { ContextualHelpComponent } from "./components/contextualHelp/contextualH
 import { AddEditBeverageModalContent } from "./admin/components/addEditBeverageModal.component";
 import { ProfileImageDirective } from "./directives/beverageImage.directive";
 
+
 @NgModule({
   declarations: [
     AppComponent,
