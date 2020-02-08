@@ -22,6 +22,8 @@ import { BeverageIsReadyToBeTakenState } from "./states/beverageIsReadyToBeTaken
 import { GettingBeverageReadyState } from "./states/gettingBeverageReadyState";
 import { GiveChangeState } from "./states/giveChangeState";
 import { MakeOrderState } from "./states/makeOrderState";
+import { ContextualHelpService } from "./services/contextualHelp.service";
+import { ContextualHelpComponent } from "./components/contextualHelp/contextualHelp.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { MakeOrderState } from "./states/makeOrderState";
     BeverageSelectorComponent,
     BeverageCardComponent,
     CoinboxComponent,
-    DisplayComponent
+    DisplayComponent,
+    ContextualHelpComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -52,7 +55,8 @@ import { MakeOrderState } from "./states/makeOrderState";
     BeverageIsReadyToBeTakenState,
     GettingBeverageReadyState,
     GiveChangeState,
-    MakeOrderState
+    MakeOrderState,
+    ContextualHelpService
   ],
   bootstrap: [AppComponent]
 })

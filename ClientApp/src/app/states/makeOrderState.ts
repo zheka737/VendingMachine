@@ -4,6 +4,7 @@ import { IState } from "./state";
 import { CoinboxService } from "../services/coinbox.service";
 import { DisplayService, DisplayState } from "../services/display.service";
 import { BeveragesDescriptionRepository } from "../model/beverageDescription.repository";
+import { ContextualHelpService } from "../services/contextualHelp.service";
 
 @Injectable()
 export class MakeOrderState implements IState {
@@ -11,7 +12,8 @@ export class MakeOrderState implements IState {
     private appStateControlService: AppStateControlService,
     private coinboxService: CoinboxService,
     private displayService: DisplayService,
-    private beverageDescriptionRepository: BeveragesDescriptionRepository
+    private beverageDescriptionRepository: BeveragesDescriptionRepository,
+    private contextualHelpService: ContextualHelpService
   ) {}
 
   Execute(): void {
@@ -19,5 +21,6 @@ export class MakeOrderState implements IState {
     this.coinboxService.updateCurrentCoinBasketValue();
     this.displayService.setDisplayState(DisplayState.Order);
     this.beverageDescriptionRepository.updateBeverageDescriptions();
+    this.contextualHelpService.showMessage("Автомат ожидает команды");
   }
 }

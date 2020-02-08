@@ -1,0 +1,5 @@
+<div>
+    <div *ngFor="let message of contextualHelpService.messages">
+        <ngb-alert *ngIf="message.show" (close)="message.show = false">{{ message.message }}</ngb-alert>
+    </div>
+</div>
