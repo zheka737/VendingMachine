@@ -21,4 +21,10 @@
             </div>
         </div>
     </div>
+    <div *ngIf="displayService.displayState == 2">
+        <span>{{displayService.message}}</span>
+    </div>
+    <div *ngIf="displayService.displayState == 3">
+        <span>{{displayService.notification}}</span>
+    </div>
 </div>

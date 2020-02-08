@@ -13,12 +13,12 @@ export class DisplayComponent {
 
 
     constructor(private displayService: DisplayService, private coinboxService: CoinboxService,
-         private appStateControlService: AppStateControlService, private beverageSelectorService: BeverageSelectorService) {
+        private beverageSelectorService: BeverageSelectorService) {
 
     }
 
     onMakeOrderButtonClick() {
-
+        this
     }
 
     checkThatBeverageIsSelected(): boolean {
