@@ -1,0 +1,49 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary btn-lg" (click)="onAddBeverageClick()">
+                Добавить
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Имя
+                    </th>
+                    <th>
+                        Кол-во
+                    </th>
+                    <th>
+                        Цена
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let beverage of repository.beverages">
+                    <td>
+                        {{beverage.name}}
+                    </td>
+                    <td>
+                        {{beverage.quantity}}
+                    </td>
+                    <td>
+                        {{beverage.cost}}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning">Изменить</button>
+                        <button type="button" class="btn btn-danger">Удалить</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

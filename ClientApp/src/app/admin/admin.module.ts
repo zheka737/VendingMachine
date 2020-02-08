@@ -2,9 +2,12 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { AdminBeveragesComponent } from "./adminBeverages.component";
-import { AdminCoinsComponent } from "./adminCoins.component";
-import { AdminComponent } from "./admin.component";
+import { AdminComponent } from "./components/admin.component";
+import { AdminBeveragesComponent } from "./components/adminBeverages.component";
+import { AdminCoinsComponent } from "./components/adminCoins.component";
+import { AdminRestDataSource } from "./model/rest.datasource";
+import { AdminRepository } from "./model/admin.repository";
+
 
 let routing = RouterModule.forChild([
   {
@@ -20,6 +23,7 @@ let routing = RouterModule.forChild([
 
 @NgModule({
   imports: [CommonModule, FormsModule, routing],
-  declarations: [AdminBeveragesComponent, AdminCoinsComponent, AdminComponent]
+  declarations: [AdminBeveragesComponent, AdminCoinsComponent, AdminComponent],
+  providers: [AdminRestDataSource, AdminRepository]
 })
 export class AdminModule {}
