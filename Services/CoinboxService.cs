@@ -8,18 +8,23 @@ using VendingMachine.Model;
 using VendingMachine.Model.DAL;
 using VendingMachine.Model.DTO;
 
-namespace VendingMachine {
+namespace VendingMachine
+{
 
-    public class CoinboxService {
+    public class CoinboxService
+    {
 
-        public CoinboxService(DbVendingMachineContext db) {
+        public CoinboxService(DbVendingMachineContext db)
+        {
             this.db = db;
         }
 
         public DbVendingMachineContext db { get; }
 
-        public async Task PutCoinInBasket(CoinType coinType) {
-            CoinInBasket coinInBasket = new CoinInBasket {
+        public async Task PutCoinInBasket(CoinType coinType)
+        {
+            CoinInBasket coinInBasket = new CoinInBasket
+            {
                 CoinType = coinType
             };
 
@@ -28,18 +33,21 @@ namespace VendingMachine {
             await db.SaveChangesAsync();
         }
 
-        public int TotalCoinBasketValue() {
+        public int TotalCoinBasketValue()
+        {
             return db.CoinsInBasket.Sum(e => e.CoinType.Nominal);
         }
 
-        public async Task SellBeverage(BeverageType beverageType) {
+        public async Task SellBeverage(BeverageType beverageType)
+        {
 
             int valueToExtract = beverageType.Cost;
             int changeValue = TotalCoinBasketValue() - valueToExtract;
 
             using (var transaction = db.Database.BeginTransaction())
             {
-                try{
+                try
+                {
                     await PutAllCoinsFromCoinBasketToVaultAsync();
 
                     await ExtractCoinFromVaultAndPutItInCoinBasketByValueAsync(changeValue);
@@ -48,7 +56,8 @@ namespace VendingMachine {
 
                     await transaction.CommitAsync();
                 }
-                catch(Exception){
+                catch (Exception)
+                {
                     await transaction.RollbackAsync();
                     throw;
                 }
@@ -61,26 +70,30 @@ namespace VendingMachine {
         {
             List<CoinVault> coinVaults = await db.CoinVaults.Where(e => e.Count != 0).OrderByDescending(e => e.CoinType.Nominal).ToListAsync();
 
-            foreach(CoinVault coinVault in coinVaults) {
-                while(coinVault.CoinType.Nominal <= changeValue){
-                    if(coinVault.Count > 0) {
-                        await ExtractCoinFromVaultAndPutItInCoinBasketAsync(coinVault.CoinType.Nominal);
-                        changeValue -= coinVault.CoinType.Nominal;
-                    }
-                        
+            foreach (CoinVault coinVault in coinVaults)
+            {
+                while (coinVault.CoinType.Nominal <= changeValue && coinVault.Count > 0)
+                {
+                    await ExtractCoinFromVaultAndPutItInCoinBasketAsync(coinVault.CoinType.Nominal);
+                    changeValue -= coinVault.CoinType.Nominal;
+
+
                 }
             }
 
-            if(changeValue > 0) {
+            if (changeValue > 0)
+            {
                 throw new CantGiveChangeException("Невозможно выдать сдачу");
             }
         }
 
-        public async Task PutAllCoinsFromCoinBasketToVaultAsync() {
+        public async Task PutAllCoinsFromCoinBasketToVaultAsync()
+        {
 
             List<CoinInBasket> coinsInBasket = await db.CoinsInBasket.Select(e => e).ToListAsync();
 
-            foreach(CoinInBasket coin in coinsInBasket) {
+            foreach (CoinInBasket coin in coinsInBasket)
+            {
                 CoinVault coinVault = db.CoinVaults.Single(e => e.CoinType.Nominal == coin.CoinType.Nominal);
                 coinVault.Count++;
 
@@ -91,28 +104,33 @@ namespace VendingMachine {
             await db.SaveChangesAsync();
         }
 
-        public async Task ExtractCoinFromVaultAndPutItInCoinBasketAsync(int nominal) {
+        public async Task ExtractCoinFromVaultAndPutItInCoinBasketAsync(int nominal)
+        {
             (await db.CoinVaults.SingleAsync(e => e.CoinType.Nominal == nominal)).Count--;
-           
-            db.CoinsInBasket.Add(new CoinInBasket {
+
+            db.CoinsInBasket.Add(new CoinInBasket
+            {
                 CoinType = await db.CoinTypes.SingleAsync(e => e.Nominal == nominal)
             });
 
             await db.SaveChangesAsync();
         }
 
-        public async Task ExtractBeverageFromStoreAsync(BeverageType beverageType) {
+        public async Task ExtractBeverageFromStoreAsync(BeverageType beverageType)
+        {
             beverageType.BeverageStore.Quantity--;
             await db.SaveChangesAsync();
         }
 
-        public async Task<List<CoinTypeDescriptionDTO>> GiveChange() {
+        public async Task<List<CoinTypeDescriptionDTO>> GiveChange()
+        {
 
             List<CoinTypeDescriptionDTO> result;
 
             List<CoinInBasket> coinInBasket = await db.CoinsInBasket.Select(e => e).ToListAsync();
 
-            result = coinInBasket.Select(e => new CoinTypeDescriptionDTO {
+            result = coinInBasket.Select(e => new CoinTypeDescriptionDTO
+            {
                 Nominal = e.CoinType.Nominal,
                 Blocked = e.CoinType.CoinTypeSettings.Blocked
             }).ToList();

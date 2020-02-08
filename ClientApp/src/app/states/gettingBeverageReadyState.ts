@@ -28,6 +28,10 @@ export class GettingBeverageReadyState implements IState {
       },
       error => {
         console.log(error);
+
+        if ((<string>error.error).indexOf("Невозможно выдать сдачу") > -1) {
+          this.displayService.showNotification("Невозможно выдать сдачу");
+        }
       }
     );
   }

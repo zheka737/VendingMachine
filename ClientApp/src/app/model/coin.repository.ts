@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { RestDataSource } from "./rest.datasource";
 import { CoinTypeDescription } from "./coinTypeDescription.model";
+import { DisplayService } from "../services/display.service";
 
 @Injectable()
 export class CoinRepository {
@@ -8,7 +9,10 @@ export class CoinRepository {
   private _currentCoinBasketValue: number;
   private _returnedChangeCoins: CoinTypeDescription[] = [];
 
-  constructor(private datasourse: RestDataSource) {}
+  constructor(
+    private datasourse: RestDataSource,
+    private displayService: DisplayService
+  ) {}
 
   loadCoinsDescription() {
     this.datasourse.getCoinsDescription().subscribe(data => {
