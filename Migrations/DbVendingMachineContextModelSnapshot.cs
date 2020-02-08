@@ -57,6 +57,23 @@ namespace VendingMachine.Migrations
                     b.ToTable("BeverageTypes");
                 });
 
+            modelBuilder.Entity("VendingMachine.Model.DAL.CoinInBasket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CoinTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoinTypeId");
+
+                    b.ToTable("CoinsInBasket");
+                });
+
             modelBuilder.Entity("VendingMachine.Model.DAL.CoinType", b =>
                 {
                     b.Property<int>("Id")
@@ -119,6 +136,15 @@ namespace VendingMachine.Migrations
                     b.HasOne("VendingMachine.Model.DAL.BeverageType", "BeverageType")
                         .WithOne("BeverageStore")
                         .HasForeignKey("VendingMachine.Model.DAL.BeverageStore", "BeverageTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VendingMachine.Model.DAL.CoinInBasket", b =>
+                {
+                    b.HasOne("VendingMachine.Model.DAL.CoinType", "CoinType")
+                        .WithMany()
+                        .HasForeignKey("CoinTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
