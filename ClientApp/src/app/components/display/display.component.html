@@ -5,10 +5,19 @@
                 <span>Current balance: {{coinboxService.getCurrentCoinBasketValue()}}</span>
             </div>
             <div class="row">
-                Placeholder
+                <div *ngIf="!checkThatBeverageIsSelected()">
+                    <span>Выберите напиток</span>
+                </div>
+                <div *ngIf="checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()==0">
+                    <span>Внесите деньги для покупки напитка</span>
+                </div>
+                <div *ngIf="checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()!=0 
+                    && !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">
+                    <span>Недостаточно денег для покупки напитка</span>
+                </div>
             </div>
             <div class="row">
-                <button type="button" class="btn btn-primary" (click)="onMakeOrderButtonClick()" [disabled]="!checkThatBeverageIsSelected() || !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">Buy</button>
+                <button type="button" class="btn btn-primary" (click)="onMakeOrderButtonClick()" [disabled]="!checkThatBeverageIsSelected() || !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">Купить</button>
             </div>
         </div>
     </div>
