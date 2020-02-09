@@ -15,7 +15,7 @@
             <input #selectedImage type="file" (change)="onImageChange($event)" />
         </div>
         <div class="col">
-            <form>
+            <form #formBeverage="ngForm">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Имя</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" required [(ngModel)]="beverage.name">
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="row">
-        <button class="btn btn-primary" (click)="onSaveButtonPressed()">Сохранить</button>
+        <button class="btn btn-primary" (click)="onSaveButtonPressed()" [disabled]="formBeverage.invalid">Сохранить</button>
         <button class="btn btn-secondary" (click)="onCancelButtonPressed()">Отменить</button>
     </div>
 </div>

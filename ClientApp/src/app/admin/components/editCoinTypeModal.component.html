@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row">
-        <form class="form-inline">
+        <form #formCoin="ngForm" class="form-inline">
             <label>Номинал {{coinType.nominal}}</label>
 
             <label class="sr-only" for="inlineFormInputName3">Кол-во</label>
@@ -14,7 +14,7 @@
             <label class="sr-only" for="inlineFormInputName4">Заблокирована</label>
             <input type="checkbox" class="form-control mb-2 mr-sm-2" id="inlineFormInputName4" name="inlineFormInputName4" required [(ngModel)]="coinType.blocked">
 
-            <button type="submit" class="btn btn-primary mb-2" (click)="onSaveButtonClicked()">Сохранить</button>
+            <button type="submit" class="btn btn-primary mb-2" (click)="onSaveButtonClicked()" [disabled]="formCoin.invalid">Сохранить</button>
             <button type="button" class="btn btn-primary mb-2" (click)="onCancelButtonClicked()">Отмена</button>
         </form>
 
