@@ -10,5 +10,7 @@ export class EditCoinTypeModalContent {
     @Input() 
     coinType: CoinTypeDTO;
 
+    onSaveButtonClicked() {}
 
+    onCancelButtonClicked() {}
 }

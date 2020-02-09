@@ -1,3 +1,25 @@
-<div>
-    {{coinType.nominal}}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <span>Редактирование</span>
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-inline">
+            <label class="sr-only" for="inlineFormInputName2">Номинал</label>
+            <input type="number" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="inlineFormInputName2" [(ngModel)]="coinType.nominal">
+
+            <label class="sr-only" for="inlineFormInputName3">Кол-во</label>
+            <input type="number" class="form-control mb-2 mr-sm-2" id="inlineFormInputName3" name="inlineFormInputName3" [(ngModel)]="coinType.count">
+
+            <label class="sr-only" for="inlineFormInputName4">Номинал</label>
+            <input type="checkbox" class="form-control mb-2 mr-sm-2" id="inlineFormInputName4" name="inlineFormInputName4" [(ngModel)]="coinType.nominal">
+
+            <button type="submit" class="btn btn-primary mb-2" (click)="onSaveButtonClicked()">Сохранить</button>
+            <button type="button" class="btn btn-primary mb-2" (click)="onCancelButtonClicked()">Отмена</button>
+        </form>
+
+
+    </div>
+
 </div>
