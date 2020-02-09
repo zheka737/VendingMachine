@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpRequest } from "@angular/common/http";
+import { HttpClient, HttpRequest, HttpHeaders } from "@angular/common/http";
 import { BeverageDTO } from "./BeverageDTO";
 import { Observable } from "rxjs";
 import { CoinTypeDTO } from "./CoinTypeDTO";
@@ -46,4 +46,6 @@ export class AdminRestDataSource {
   deleteBeverage(beverageId: number): Observable<Object> {
     return this.http.delete(`/api/api/beverages/${beverageId}/delete`);
   }
+
+
 }

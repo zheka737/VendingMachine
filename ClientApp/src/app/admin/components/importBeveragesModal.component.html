@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Импорт напитков</h4>
+</div>
+<div class="modal-body">
+    <input type="file" (change)="onFileChanged($event)" #fileInput>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" (click)="onUploadClick()">Импортировать</button>
+
+    <button class="btn btn-primary" type="button" (click)="onCancelClick()">Отмена</button>
+</div>

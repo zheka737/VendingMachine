@@ -28,6 +28,7 @@ import { AddEditBeverageModalContent } from "./admin/components/addEditBeverageM
 import { ProfileImageDirective } from "./directives/beverageImage.directive";
 import { EditCoinTypeModalContent } from "./admin/components/editCoinTypeModal.component";
 import { AuthGuard } from "./services/admin.guard";
+import { ImportBeveragesModalComponent } from "./admin/components/importBeveragesModal.component";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AuthGuard } from "./services/admin.guard";
     ContextualHelpComponent,
     AddEditBeverageModalContent,
     ProfileImageDirective,
-    EditCoinTypeModalContent
+    EditCoinTypeModalContent,
+    ImportBeveragesModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -68,6 +70,6 @@ import { AuthGuard } from "./services/admin.guard";
     AuthGuard
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AddEditBeverageModalContent, EditCoinTypeModalContent]
+  entryComponents: [AddEditBeverageModalContent, EditCoinTypeModalContent, ImportBeveragesModalComponent]
 })
 export class AppModule {}
