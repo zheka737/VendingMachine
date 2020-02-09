@@ -52,6 +52,10 @@ code {
     font-weight: 600;
 }
 
+.balance {
+    font-weight: 600;
+}
+
 .display-background {
     background-color: gainsboro;
 }

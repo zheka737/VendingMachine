@@ -1,7 +1,7 @@
 <div class="h-100 display-background">
     <div class="h-100" *ngIf="displayService.displayState == 1">
         <div class="h-25 d-flex justify-content-center align-items-center">
-            <span>Баланс: {{coinboxService.getCurrentCoinBasketValue()}}</span>
+            <span class="balance">Баланс: {{coinboxService.getCurrentCoinBasketValue()}}</span>
         </div>
         <div class="h-75 d-flex justify-content-center align-items-center" *ngIf="!checkThatBeverageIsSelected() || !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">
             <div *ngIf="!checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()!=0">
