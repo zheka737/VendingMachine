@@ -16,9 +16,15 @@ export class AdminBeveragesComponent {
     repository.updateBeverages();
   }
 
-  onAddBeverageClick() {}
+  onAddBeverageClick() {
+    this.addEditBeverage(new BeverageDTO());
+  }
 
-  onEditBeverageClick(beverage: BeverageDTO) {
+  onDeleteClick(beverage) {
+    this.repository.deleteBeverage(beverage.id);
+  }
+
+  addEditBeverage(beverage: BeverageDTO) {
     const modalRef = this.modalService.open(AddEditBeverageModalContent);
     modalRef.componentInstance.beverage = beverage;
     modalRef.result.then(
@@ -39,5 +45,9 @@ export class AdminBeveragesComponent {
         this.repository.updateBeverages();
       }
     );
+  }
+
+  onEditBeverageClick(beverage: BeverageDTO) {
+    this.addEditBeverage(beverage);
   }
 }

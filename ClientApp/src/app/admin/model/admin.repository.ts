@@ -54,9 +54,17 @@ export class AdminRepository {
   addEditBeverage(beverage: BeverageDTO): Observable<BeverageDTO> {
     let observable = this.dataSource.addEditBeverage(beverage);
     observable.subscribe(event => {
-      console.log("Успешно загружено");
+      this.updateBeverages();
+      this.contextHelp.showMessage("Напиток успешно изменен");
     });
 
     return observable;
+  }
+
+  deleteBeverage(beverageId: number) {
+    this.dataSource.deleteBeverage(beverageId).subscribe(() => {
+      this.updateBeverages();
+      this.contextHelp.showMessage("Напиток удален");
+    });
   }
 }
