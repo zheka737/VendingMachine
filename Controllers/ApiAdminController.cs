@@ -29,7 +29,6 @@ public class AdminController : ControllerBase
             Id = e.Id,
             Name = e.Name,
             Cost = e.Cost,
-            Image = e.Image,
             Quantity = e.BeverageStore.Quantity
         }).ToListAsync();
     }
