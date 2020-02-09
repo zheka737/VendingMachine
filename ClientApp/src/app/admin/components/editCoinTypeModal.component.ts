@@ -1,16 +1,27 @@
 import { Component, Input } from "@angular/core";
 import { CoinTypeDTO } from "../model/CoinTypeDTO";
+import { AdminRestDataSource } from "../model/rest.datasource";
+import { AdminRepository } from "../model/admin.repository";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-    selector: "edit-coin-type",
-    templateUrl: "editCoinTypeModal.component.html"
+  selector: "edit-coin-type",
+  templateUrl: "editCoinTypeModal.component.html"
 })
 export class EditCoinTypeModalContent {
+  constructor(
 
-    @Input() 
-    coinType: CoinTypeDTO;
+    public activeModal: NgbActiveModal
+  ) {}
 
-    onSaveButtonClicked() {}
+  @Input()
+  coinType: CoinTypeDTO;
 
-    onCancelButtonClicked() {}
+  onSaveButtonClicked() {
+    this.activeModal.close();
+  }
+
+  onCancelButtonClicked() {
+    this.activeModal.dismiss();
+  }
 }

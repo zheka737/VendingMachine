@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { BeverageDTO } from "./BeverageDTO";
 import { Observable } from "rxjs";
 import { CoinTypeDTO } from "./CoinTypeDTO";
+import { share } from "rxjs/operators";
 
 @Injectable()
 export class AdminRestDataSource {
@@ -16,5 +17,9 @@ export class AdminRestDataSource {
 
     getAllCoinTypes(): Observable<CoinTypeDTO[]> {
         return this.http.get<CoinTypeDTO[]>("/api/get-all-coin-types");
+    }
+
+    editCoinType(coinType: CoinTypeDTO) {
+        return this.http.post("/api/edit-coin-type", coinType).pipe(share());
     }
 }
