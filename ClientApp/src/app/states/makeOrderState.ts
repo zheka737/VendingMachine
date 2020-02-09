@@ -23,7 +23,6 @@ export class MakeOrderState implements IState {
     this.coinboxService.updateCurrentCoinBasketValue();
     this.displayService.setDisplayState(DisplayState.Order);
     this.beverageDescriptionRepository.updateBeverageDescriptions();
-    this.contextualHelpService.showMessage("Автомат ожидает команды");
     this.beverageSelectorService.isReadonly = false;
     this.coinboxService.isReadOnly = false;
   }
