@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VendingMachine.Infrastructure;
 using VendingMachine.Model.DAL;
 using VendingMachine.Model.DTO;
 
@@ -74,7 +75,7 @@ namespace VendingMachine.Controllers
             }
             else
             {
-                return "";
+                return Helper.EmptyImage;
             }
 
         }
