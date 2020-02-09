@@ -23,13 +23,17 @@ export class AdminBeveragesComponent {
     modalRef.componentInstance.beverage = beverage;
     modalRef.result.then(
       data => {
-        if (data.imageChanged) {
-          this.repository
-            .uploadBeverageImage(data.file, data.beverage.id)
-            .subscribe(() => {
-              this.repository.updateBeverages();
-            });
-        }
+        this.repository
+          .addEditBeverage(data.beverage)
+          .subscribe((createdEditedBeverage: BeverageDTO) => {
+            if (data.imageChanged) {
+              this.repository
+                .uploadBeverageImage(data.file, createdEditedBeverage.id)
+                .subscribe(() => {
+                  this.repository.updateBeverages();
+                });
+            }
+          });
       },
       () => {
         this.repository.updateBeverages();

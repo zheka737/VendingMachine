@@ -48,6 +48,11 @@ export class AdminRepository {
   uploadBeverageImage(file, id): Observable<Object> {
     let observable = this.dataSource.uploadBeverageImage(file, id);
 
+    return observable;
+  }
+
+  addEditBeverage(beverage: BeverageDTO): Observable<BeverageDTO> {
+    let observable = this.dataSource.addEditBeverage(beverage);
     observable.subscribe(event => {
       console.log("Успешно загружено");
     });

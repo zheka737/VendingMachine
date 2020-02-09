@@ -37,4 +37,8 @@ export class AdminRestDataSource {
 
     return this.http.request(uploadReq).pipe(share());
   }
+
+  addEditBeverage(beverage: BeverageDTO): Observable<BeverageDTO> {
+    return this.http.post<BeverageDTO>("/api/add-edit-beverage", beverage).pipe(share());
+  }
 }

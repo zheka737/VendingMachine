@@ -83,5 +83,35 @@ public class AdminController : ControllerBase
 
     }
 
+    [HttpPost, Route("api/add-edit-beverage")]
+    public async Task<BeverageDTO> AddEditBeverage([FromBody]BeverageDTO beverage)
+    {
+        BeverageType beverageType = null;
+
+        if (beverage.Id != default)
+        {
+            beverageType = await db.BeverageTypes.SingleAsync(e => e.Id == beverage.Id);
+        }
+        else
+        {
+            beverageType = new BeverageType();
+        }
+
+        beverageType.Name = beverage.Name;
+        beverageType.Cost = beverage.Cost;
+        beverageType.BeverageStore.Quantity = beverage.Quantity;
+
+        await db.SaveChangesAsync();
+
+        return new BeverageDTO
+        {
+            Id = beverageType.Id,
+            Cost = beverageType.Cost,
+            Name = beverageType.Name,
+            Quantity = beverageType.BeverageStore.Quantity
+        };
+
+    }
+
 
 }
