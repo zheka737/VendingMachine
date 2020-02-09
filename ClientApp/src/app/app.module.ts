@@ -27,6 +27,7 @@ import { ContextualHelpComponent } from "./components/contextualHelp/contextualH
 import { AddEditBeverageModalContent } from "./admin/components/addEditBeverageModal.component";
 import { ProfileImageDirective } from "./directives/beverageImage.directive";
 import { EditCoinTypeModalContent } from "./admin/components/editCoinTypeModal.component";
+import { AuthGuard } from "./services/admin.guard";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { EditCoinTypeModalContent } from "./admin/components/editCoinTypeModal.c
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: "admin", loadChildren: "./admin/admin.module#AdminModule" },
+      { path: "admin/:key", loadChildren: "./admin/admin.module#AdminModule" , canActivate: [AuthGuard]},
       { path: "", component: VendingMachinePanelComponent, pathMatch: "full" }
     ]),
     NgbModule
@@ -63,7 +64,8 @@ import { EditCoinTypeModalContent } from "./admin/components/editCoinTypeModal.c
     GettingBeverageReadyState,
     GiveChangeState,
     MakeOrderState,
-    ContextualHelpService
+    ContextualHelpService,
+    AuthGuard
   ],
   bootstrap: [AppComponent],
   entryComponents: [AddEditBeverageModalContent, EditCoinTypeModalContent]
