@@ -2,9 +2,9 @@
     <div class="btn-group" role="group">
 
         <div *ngFor="let coinType of coinBoxService.getCoinsDescription()">
-            <button [disabled]="coinType.blocked" type="button" class="btn btn-light" (click)="onCoinClick(coinType.nominal)">{{coinType.nominal}}</button>
+            <button [disabled]="coinType.blocked || coinBoxService.isReadOnly" type="button" class="btn btn-light" (click)="onCoinClick(coinType.nominal)">{{coinType.nominal}}</button>
         </div>
 
-        <button type="button" class="btn btn-secondary" (click)="onReturnMoneyClick()" [disabled]="coinBoxService.getCurrentCoinBasketValue()==0">Вернуть деньги</button>
+        <button type="button" class="btn btn-secondary" (click)="onReturnMoneyClick()" [disabled]="coinBoxService.getCurrentCoinBasketValue()==0 || coinBoxService.isReadOnly">Вернуть деньги</button>
     </div>
 </div>

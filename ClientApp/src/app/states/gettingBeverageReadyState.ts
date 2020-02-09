@@ -6,6 +6,7 @@ import { RestDataSource } from "../model/rest.datasource";
 import { BeverageSelectorService } from "../services/beverageSelector.service";
 import { BeverageDescription } from "../model/beverageDescription.model";
 import { ContextualHelpService } from "../services/contextualHelp.service";
+import { CoinboxService } from "../services/coinbox.service";
 
 @Injectable()
 export class GettingBeverageReadyState implements IState {
@@ -14,12 +15,15 @@ export class GettingBeverageReadyState implements IState {
     private displayService: DisplayService,
     private restDataSource: RestDataSource,
     private beverageSelectorService: BeverageSelectorService,
-    private contextualHelp: ContextualHelpService
+    private contextualHelp: ContextualHelpService,
+    private coinboxService: CoinboxService,
+    
   ) {}
 
   Execute(): void {
     let beverageType: BeverageDescription = this.beverageSelectorService.getCurrentlySelectedBeverage();
     this.beverageSelectorService.isReadonly = true;
+    this.coinboxService.isReadOnly = true;
     this.contextualHelp.showMessage("Автомат жужжит");
 
     this.restDataSource.orderBeverage(beverageType.beverageTypeId).subscribe(

@@ -25,5 +25,6 @@ export class MakeOrderState implements IState {
     this.beverageDescriptionRepository.updateBeverageDescriptions();
     this.contextualHelpService.showMessage("Автомат ожидает команды");
     this.beverageSelectorService.isReadonly = false;
+    this.coinboxService.isReadOnly = false;
   }
 }
