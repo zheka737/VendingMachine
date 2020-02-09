@@ -26,6 +26,7 @@ import { ContextualHelpService } from "./services/contextualHelp.service";
 import { ContextualHelpComponent } from "./components/contextualHelp/contextualHelp.component";
 import { AddEditBeverageModalContent } from "./admin/components/addEditBeverageModal.component";
 import { ProfileImageDirective } from "./directives/beverageImage.directive";
+import { EditCoinTypeModalContent } from "./admin/components/editCoinTypeModal.component";
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ProfileImageDirective } from "./directives/beverageImage.directive";
     DisplayComponent,
     ContextualHelpComponent,
     AddEditBeverageModalContent,
-    ProfileImageDirective
+    ProfileImageDirective,
+    EditCoinTypeModalContent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -65,6 +67,6 @@ import { ProfileImageDirective } from "./directives/beverageImage.directive";
     ContextualHelpService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AddEditBeverageModalContent]
+  entryComponents: [AddEditBeverageModalContent, EditCoinTypeModalContent]
 })
 export class AppModule {}

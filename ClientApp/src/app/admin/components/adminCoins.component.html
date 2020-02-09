@@ -1,3 +1,40 @@
-<div>
-    Coins
+<div class="container-fluid">
+
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Номинал
+                    </th>
+                    <th>
+                        Кол-во
+                    </th>
+                    <th>
+                        Заблокирована
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let coinType of repository.coinTypes">
+                    <td>
+                        {{coinType.nominal}}
+                    </td>
+                    <td>
+                        {{coinType.count}}
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="coinType.blocked" disabled>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="onEditCoinTypeClicked(coinType)">Изменить</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>

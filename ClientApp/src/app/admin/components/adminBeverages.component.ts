@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { AdminRepository } from "../model/admin.repository";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AddEditBeverageModalContent } from "./addEditBeverageModal.component";
-import { BeverageDTO } from "../BeverageDTO";
+import { BeverageDTO } from "../model/BeverageDTO";
 
 @Component({
   selector: "admin-beverages",

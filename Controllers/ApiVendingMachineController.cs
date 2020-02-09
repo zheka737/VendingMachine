@@ -55,7 +55,7 @@ namespace VendingMachine.Controllers {
             await CoinboxService.SellBeverage(beverageType);
         }
 
-        [Route("api/beverages/{id:int}/image")]
+        [HttpGet, Route("api/beverages/{id:int}/image")]
         public async Task<string> GetImageAsync(int id) {
             BeverageType beverageType = await db.BeverageTypes.SingleAsync(e => e.Id == id);
 
@@ -65,6 +65,18 @@ namespace VendingMachine.Controllers {
             else {
                 return "";
             }
+
+        }
+
+        [HttpGet, Route("api/get-all-coin-types")]
+        public async Task<List<CoinTypeDTO>> GetAllCoinTypes() {
+
+            return await db.CoinTypes.Select(e => new CoinTypeDTO {
+                Blocked = e.CoinTypeSettings.Blocked,
+                Nominal = e.Nominal,
+                Count = e.CoinVault.Count
+            }).ToListAsync();
+
 
         }
 

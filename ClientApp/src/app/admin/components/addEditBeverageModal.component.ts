@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { BeverageDTO } from "../BeverageDTO";
+import { BeverageDTO } from "../model/BeverageDTO";
 import { RestDataSource } from "src/app/model/rest.datasource";
 
 @Component({
