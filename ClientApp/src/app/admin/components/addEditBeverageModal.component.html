@@ -1,4 +1,13 @@
-<div>
+<div class="container">
+
     <img [beverage-image]="beverage.id">
-    <input #file type="file" (change)="uploadBeverageImage(file.files)" />
+    <input #selectedImage type="file" />
+
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <button class="btn btn-primary" (click)="onSaveButtonPressed()">Сохранить</button>
+        <button class="btn btn-secondary" (click)="onCancelButtonPressed()">Отменить</button>
+    </div>
 </div>

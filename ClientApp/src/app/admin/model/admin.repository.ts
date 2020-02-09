@@ -7,43 +7,51 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class AdminRepository {
+  private _beverages: BeverageDTO[] = [];
+  private _coinTypes: CoinTypeDTO[] = [];
 
-    private _beverages: BeverageDTO[] = [];
-    private _coinTypes: CoinTypeDTO[] = [];
+  constructor(
+    private dataSource: AdminRestDataSource,
+    private contextHelp: ContextualHelpService
+  ) {}
 
-    constructor(private dataSource: AdminRestDataSource, private contextHelp: ContextualHelpService) {
+  get beverages() {
+    return this._beverages;
+  }
 
-    }
+  get coinTypes() {
+    return this._coinTypes;
+  }
 
-    get beverages() {
-        return this._beverages;
-    }
+  updateBeverages() {
+    this.dataSource.getAllBeverages().subscribe((data: BeverageDTO[]) => {
+      this._beverages = data;
+    });
+  }
 
-    get coinTypes() {
-        return this._coinTypes;
-    }
+  updateCoinTypes() {
+    this.dataSource.getAllCoinTypes().subscribe((data: CoinTypeDTO[]) => {
+      this._coinTypes = data;
+    });
+  }
 
-    updateBeverages() {
-        this.dataSource.getAllBeverages().subscribe((data: BeverageDTO[]) => {
-            this._beverages = data;
-        })
-    }
+  editCoinType(coinType: CoinTypeDTO): Observable<Object> {
+    let observable = this.dataSource.editCoinType(coinType);
 
-    updateCoinTypes() {
-        this.dataSource.getAllCoinTypes().subscribe((data: CoinTypeDTO[]) => {
-            this._coinTypes = data;
-        })
-    }
+    observable.subscribe(() => {
+      this.contextHelp.showMessage("Монета изменена");
+    });
 
-    editCoinType(coinType: CoinTypeDTO): Observable<Object> {
+    return observable;
+  }
 
-        let observable =  this.dataSource.editCoinType(coinType)
+  uploadBeverageImage(file, id): Observable<Object> {
+    let observable = this.dataSource.uploadBeverageImage(file, id);
 
-        observable.subscribe(() => {
-            this.contextHelp.showMessage("Монета изменена");
-        })
+    observable.subscribe(event => {
+      console.log("Успешно загружено");
+    });
 
-        return observable;
-    }
-
+    return observable;
+  }
 }

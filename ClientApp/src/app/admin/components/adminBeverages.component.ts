@@ -22,6 +22,16 @@ export class AdminBeveragesComponent {
   onEditBeverageClick(beverage: BeverageDTO) {
     const modalRef = this.modalService.open(AddEditBeverageModalContent);
     modalRef.componentInstance.beverage = beverage;
+    modalRef.result.then((data)=> {
+      if(data.file) {
+        this.repository.uploadBeverageImage(data.file, data.beverage.id).subscribe(() => {
+          this.repository.updateBeverages();
+        })
+      }
+
+    }, () => {
+      this.repository.updateBeverages();
+    })
   }
 
 }
