@@ -5,10 +5,10 @@
                 <span>Баланс: {{coinboxService.getCurrentCoinBasketValue()}}</span>
             </div>
             <div class="row">
-                <div *ngIf="!checkThatBeverageIsSelected()">
+                <div *ngIf="!checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()!=0">
                     <span>Выберите напиток</span>
                 </div>
-                <div *ngIf="checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()==0">
+                <div *ngIf="coinboxService.getCurrentCoinBasketValue()==0">
                     <span>Внесите деньги для покупки напитка</span>
                 </div>
                 <div *ngIf="checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()!=0 

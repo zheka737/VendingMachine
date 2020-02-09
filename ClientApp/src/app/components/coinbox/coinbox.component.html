@@ -1,7 +1,10 @@
 <div>
-    <div *ngFor="let coinType of coinBoxService.getCoinsDescription()">
-        <button type="button" class="btn btn-light" (click)="onCoinClick(coinType.nominal)">{{coinType.nominal}}</button>
-    </div>
+    <div class="btn-group" role="group">
 
-    <button type="button" class="btn secondary" (click)="onReturnMoneyClick()">Вернуть деньги</button>
+        <div *ngFor="let coinType of coinBoxService.getCoinsDescription()">
+            <button type="button" class="btn btn-light" (click)="onCoinClick(coinType.nominal)">{{coinType.nominal}}</button>
+        </div>
+
+        <button type="button" class="btn btn-secondary" (click)="onReturnMoneyClick()" [disabled]="coinBoxService.getCurrentCoinBasketValue()==0">Вернуть деньги</button>
+    </div>
 </div>

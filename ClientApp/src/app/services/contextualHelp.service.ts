@@ -11,7 +11,7 @@ export class ContextualHelpService {
   showMessage(message: string) {
     let messageObject = new ContextualHelpMessage(message);
 
-    this._messages.push(messageObject);
+    this._messages.unshift(messageObject);
 
     setTimeout(() => {
       messageObject.show = false;
