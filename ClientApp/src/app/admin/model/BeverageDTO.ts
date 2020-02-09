@@ -1,13 +1,9 @@
-
 export class BeverageDTO {
-    
-    id: number;
+  id: number;
 
-    name: string;
+  name: string;
 
-    image: [];
+  cost: number;
 
-    cost: number;
-
-    quantity: number;
+  quantity: number;
 }
