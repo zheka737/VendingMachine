@@ -9,29 +9,31 @@ import { BeverageDTO } from "../model/BeverageDTO";
   templateUrl: "adminBeverages.component.html"
 })
 export class AdminBeveragesComponent {
-
-  constructor(private repository: AdminRepository,
-      private modalService: NgbModal) {
+  constructor(
+    private repository: AdminRepository,
+    private modalService: NgbModal
+  ) {
     repository.updateBeverages();
   }
 
-  onAddBeverageClick() {
-    
-  }
+  onAddBeverageClick() {}
 
   onEditBeverageClick(beverage: BeverageDTO) {
     const modalRef = this.modalService.open(AddEditBeverageModalContent);
     modalRef.componentInstance.beverage = beverage;
-    modalRef.result.then((data)=> {
-      if(data.file) {
-        this.repository.uploadBeverageImage(data.file, data.beverage.id).subscribe(() => {
-          this.repository.updateBeverages();
-        })
+    modalRef.result.then(
+      data => {
+        if (data.imageChanged) {
+          this.repository
+            .uploadBeverageImage(data.file, data.beverage.id)
+            .subscribe(() => {
+              this.repository.updateBeverages();
+            });
+        }
+      },
+      () => {
+        this.repository.updateBeverages();
       }
-
-    }, () => {
-      this.repository.updateBeverages();
-    })
+    );
   }
-
 }

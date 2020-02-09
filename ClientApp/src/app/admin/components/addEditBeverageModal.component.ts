@@ -8,6 +8,8 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
   templateUrl: "addEditBeverageModal.component.html"
 })
 export class AddEditBeverageModalContent {
+  imageChanged: any = false;
+  previewImage: string | ArrayBuffer;
   constructor(public activeModal: NgbActiveModal) {}
 
   @Input()
@@ -19,7 +21,8 @@ export class AddEditBeverageModalContent {
     this.activeModal.close(
       {
         file: this.selectedImage.nativeElement.files[0],
-        beverage: this.beverage
+        beverage: this.beverage,
+        imageChanged: this.imageChanged
       }
     );
   }
@@ -27,4 +30,20 @@ export class AddEditBeverageModalContent {
   onCancelButtonPressed() {
     this.activeModal.dismiss();
   }
+
+  onImageChange(event) {
+    this.imageChanged = true;
+    this.readURL(event);
+  }
+
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
+
+        const reader = new FileReader();
+        reader.onload = e => this.previewImage = reader.result;
+
+        reader.readAsDataURL(file);
+    }
+}
 }

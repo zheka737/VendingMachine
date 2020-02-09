@@ -1,7 +1,13 @@
 <div class="container">
+    <div *ngIf="beverage.id && !imageChanged">
+        <img [beverage-image]="beverage.id">
+    </div>
 
-    <img [beverage-image]="beverage.id">
-    <input #selectedImage type="file" />
+    <div *ngIf="!beverage.id || imageChanged">
+        <img [src]="previewImage">
+    </div>
+
+    <input #selectedImage type="file" (change)="onImageChange($event)" />
 
     <div class="row">
 

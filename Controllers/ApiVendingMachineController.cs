@@ -68,30 +68,7 @@ namespace VendingMachine.Controllers {
 
         }
 
-        [HttpGet, Route("api/get-all-coin-types")]
-        public async Task<List<CoinTypeDTO>> GetAllCoinTypes() {
-
-            return await db.CoinTypes.Select(e => new CoinTypeDTO {
-                Blocked = e.CoinTypeSettings.Blocked,
-                Nominal = e.Nominal,
-                Count = e.CoinVault.Count
-            }).ToListAsync();
-
-
-        }
-
-        [HttpPost, Route("api/edit-coin-type")]
-        public async Task EditCoinType([FromBody]CoinTypeDTO coinTypeDTO) {
-            CoinType coinType = await db.CoinTypes.SingleAsync(e => e.Nominal == coinTypeDTO.Nominal);
-
-            coinType.CoinTypeSettings.Blocked = coinTypeDTO.Blocked;
-            coinType.CoinVault.Count = coinTypeDTO.Count;
-
-            await db.SaveChangesAsync();
-
-
-        }
-
+        
     }
 
 }

@@ -24,7 +24,10 @@ export class AdminRestDataSource {
   uploadBeverageImage(file, beverageTypeId: number): Observable<Object> {
     const formData = new FormData();
 
-    formData.append(file.name, file);
+    if(file) {
+      formData.append(file.name, file);
+    }
+
 
     const uploadReq = new HttpRequest(
       "POST",

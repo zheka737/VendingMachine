@@ -39,19 +39,49 @@ public class AdminController : ControllerBase
     {
         BeverageType beverageType = await db.BeverageTypes.SingleAsync(e => e.Id == id);
 
-
-        var stream = Request.Form.Files[0].OpenReadStream();
         byte[] fileData = null;
-        using (var binaryReader = new BinaryReader(stream))
+        if (Request.Form.Files.Count != 0)
         {
-            fileData = binaryReader.ReadBytes((int)stream.Length);
+            var stream = Request.Form.Files[0].OpenReadStream();
+
+            using (var binaryReader = new BinaryReader(stream))
+            {
+                fileData = binaryReader.ReadBytes((int)stream.Length);
+            }
         }
-        
+
+
         beverageType.Image = fileData;
 
         await db.SaveChangesAsync();
     }
 
-    
+    [HttpGet, Route("api/get-all-coin-types")]
+    public async Task<List<CoinTypeDTO>> GetAllCoinTypes()
+    {
+
+        return await db.CoinTypes.Select(e => new CoinTypeDTO
+        {
+            Blocked = e.CoinTypeSettings.Blocked,
+            Nominal = e.Nominal,
+            Count = e.CoinVault.Count
+        }).ToListAsync();
+
+
+    }
+
+    [HttpPost, Route("api/edit-coin-type")]
+    public async Task EditCoinType([FromBody]CoinTypeDTO coinTypeDTO)
+    {
+        CoinType coinType = await db.CoinTypes.SingleAsync(e => e.Nominal == coinTypeDTO.Nominal);
+
+        coinType.CoinTypeSettings.Blocked = coinTypeDTO.Blocked;
+        coinType.CoinVault.Count = coinTypeDTO.Count;
+
+        await db.SaveChangesAsync();
+
+
+    }
+
 
 }
