@@ -4,20 +4,17 @@ import { BeverageDescription } from "./beverageDescription.model";
 
 @Injectable()
 export class BeveragesDescriptionRepository {
+  private beveragesDescription: BeverageDescription[] = [];
 
-    private beveragesDescription: BeverageDescription[] = [];
+  constructor(private datasourse: RestDataSource) {}
 
-    constructor(private datasourse: RestDataSource) {
+  updateBeverageDescriptions() {
+    this.datasourse.getBeveragesDescription().subscribe(data => {
+      this.beveragesDescription = data;
+    });
+  }
 
-    }
-
-    updateBeverageDescriptions() {
-        this.datasourse.getBeveragesDescription().subscribe(data => {
-            this.beveragesDescription = data;
-        })
-    }
-
-    getBeverageDescriptions() {
-        return this.beveragesDescription;
-    }
+  getBeverageDescriptions() {
+    return this.beveragesDescription;
+  }
 }

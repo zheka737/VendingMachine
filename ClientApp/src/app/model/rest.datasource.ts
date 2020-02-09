@@ -7,7 +7,10 @@ import { ContextualHelpService } from "../services/contextualHelp.service";
 
 @Injectable()
 export class RestDataSource {
-  constructor(private http: HttpClient, private contextualHelp: ContextualHelpService) {}
+  constructor(
+    private http: HttpClient,
+    private contextualHelp: ContextualHelpService
+  ) {}
 
   getBeveragesDescription(): Observable<BeverageDescription[]> {
     return this.http.get<BeverageDescription[]>(
@@ -36,16 +39,21 @@ export class RestDataSource {
   }
 
   getBeverageImage(beverageTypeId) {
-    return this.http.get(`api/beverages/${beverageTypeId}/image`, { responseType: 'text' });
+    return this.http.get(`api/beverages/${beverageTypeId}/image`, {
+      responseType: "text"
+    });
   }
 
   uploadBeverageImage(file, beverageTypeId: number) {
-
     const formData = new FormData();
 
     formData.append(file.name, file);
 
-    const uploadReq = new HttpRequest('POST', `api/admin/beverage/${beverageTypeId}/add-update-beverage-image`, formData);
+    const uploadReq = new HttpRequest(
+      "POST",
+      `api/admin/beverage/${beverageTypeId}/add-update-beverage-image`,
+      formData
+    );
 
     this.http.request(uploadReq).subscribe(event => {
       this.contextualHelp.showMessage("Картинка успешно загружена");

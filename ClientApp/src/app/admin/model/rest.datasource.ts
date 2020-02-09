@@ -24,10 +24,9 @@ export class AdminRestDataSource {
   uploadBeverageImage(file, beverageTypeId: number): Observable<Object> {
     const formData = new FormData();
 
-    if(file) {
+    if (file) {
       formData.append(file.name, file);
     }
-
 
     const uploadReq = new HttpRequest(
       "POST",
@@ -39,7 +38,9 @@ export class AdminRestDataSource {
   }
 
   addEditBeverage(beverage: BeverageDTO): Observable<BeverageDTO> {
-    return this.http.post<BeverageDTO>("/api/add-edit-beverage", beverage).pipe(share());
+    return this.http
+      .post<BeverageDTO>("/api/add-edit-beverage", beverage)
+      .pipe(share());
   }
 
   deleteBeverage(beverageId: number): Observable<Object> {

@@ -15,16 +15,14 @@ export class AddEditBeverageModalContent {
   @Input()
   beverage: BeverageDTO;
 
-  @ViewChild('selectedImage', { static: true }) selectedImage: ElementRef;
+  @ViewChild("selectedImage", { static: true }) selectedImage: ElementRef;
 
   onSaveButtonPressed() {
-    this.activeModal.close(
-      {
-        file: this.selectedImage.nativeElement.files[0],
-        beverage: this.beverage,
-        imageChanged: this.imageChanged
-      }
-    );
+    this.activeModal.close({
+      file: this.selectedImage.nativeElement.files[0],
+      beverage: this.beverage,
+      imageChanged: this.imageChanged
+    });
   }
 
   onCancelButtonPressed() {
@@ -38,12 +36,12 @@ export class AddEditBeverageModalContent {
 
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
-        const file = event.target.files[0];
+      const file = event.target.files[0];
 
-        const reader = new FileReader();
-        reader.onload = e => this.previewImage = reader.result;
+      const reader = new FileReader();
+      reader.onload = e => (this.previewImage = reader.result);
 
-        reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
     }
-}
+  }
 }

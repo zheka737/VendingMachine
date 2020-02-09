@@ -53,10 +53,16 @@ export class CoinRepository {
       data => {
         this._returnedChangeCoins = data;
 
-        this.contextualHelp.showMessage(`Автомат выдал монеты номиналом: ${this.returnedChangeCoins.reduce((prevVal,currVal,idx) => {
-          return idx == 0 ? currVal.nominal : prevVal + ', ' + currVal.nominal;
-        }, "")}`)
-
+        this.contextualHelp.showMessage(
+          `Автомат выдал монеты номиналом: ${this.returnedChangeCoins.reduce(
+            (prevVal, currVal, idx) => {
+              return idx == 0
+                ? currVal.nominal
+                : prevVal + ", " + currVal.nominal;
+            },
+            ""
+          )}`
+        );
       },
       error => {
         console.log(error);

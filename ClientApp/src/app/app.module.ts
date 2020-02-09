@@ -28,7 +28,6 @@ import { AddEditBeverageModalContent } from "./admin/components/addEditBeverageM
 import { ProfileImageDirective } from "./directives/beverageImage.directive";
 import { EditCoinTypeModalContent } from "./admin/components/editCoinTypeModal.component";
 
-
 @NgModule({
   declarations: [
     AppComponent,

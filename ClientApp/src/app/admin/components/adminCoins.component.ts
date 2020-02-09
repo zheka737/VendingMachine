@@ -9,21 +9,25 @@ import { CoinTypeDTO } from "../model/CoinTypeDTO";
   templateUrl: "adminCoins.component.html"
 })
 export class AdminCoinsComponent {
-  constructor(private repository: AdminRepository, private modalService: NgbModal) {
+  constructor(
+    private repository: AdminRepository,
+    private modalService: NgbModal
+  ) {
     this.repository.updateCoinTypes();
   }
 
   onEditCoinTypeClicked(coinType: CoinTypeDTO) {
     const modalRef = this.modalService.open(EditCoinTypeModalContent);
     modalRef.componentInstance.coinType = coinType;
-    modalRef.result.then(() => {
-      this.repository.editCoinType(coinType).subscribe(() => {
+    modalRef.result.then(
+      () => {
+        this.repository.editCoinType(coinType).subscribe(() => {
+          this.repository.updateCoinTypes();
+        });
+      },
+      () => {
         this.repository.updateCoinTypes();
-      });
-
-    }, () => {
-      this.repository.updateCoinTypes();
-    });
-
+      }
+    );
   }
 }

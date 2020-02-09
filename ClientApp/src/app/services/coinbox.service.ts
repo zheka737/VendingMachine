@@ -5,7 +5,12 @@ import { ContextualHelpService } from "./contextualHelp.service";
 
 @Injectable()
 export class CoinboxService {
-  constructor(private coinRepository: CoinRepository, private contextualHelp: ContextualHelpService) {}
+  constructor(
+    private coinRepository: CoinRepository,
+    private contextualHelp: ContextualHelpService
+  ) {}
+
+  isReadOnly: boolean = false;
 
   returnModey() {
     this.coinRepository.getChange();
@@ -22,7 +27,9 @@ export class CoinboxService {
 
   putCoinInCoinBasket(coinNominal: number): void {
     this.coinRepository.putCoinInCoinBasket(coinNominal);
-    this.contextualHelp.showMessage(`Вставлена монета номиналом ${coinNominal}`);
+    this.contextualHelp.showMessage(
+      `Вставлена монета номиналом ${coinNominal}`
+    );
   }
 
   getCurrentCoinBasketValue(): number {

@@ -9,7 +9,6 @@ import { AdminRestDataSource } from "./model/rest.datasource";
 import { AdminRepository } from "./model/admin.repository";
 import { AddEditBeverageModalContent } from "./components/addEditBeverageModal.component";
 
-
 let routing = RouterModule.forChild([
   {
     path: "",
@@ -25,7 +24,6 @@ let routing = RouterModule.forChild([
 @NgModule({
   imports: [CommonModule, FormsModule, routing],
   declarations: [AdminBeveragesComponent, AdminCoinsComponent, AdminComponent],
-  providers: [AdminRestDataSource, AdminRepository],
-
+  providers: [AdminRestDataSource, AdminRepository]
 })
 export class AdminModule {}

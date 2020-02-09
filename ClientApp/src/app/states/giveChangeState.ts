@@ -18,7 +18,6 @@ export class GiveChangeState implements IState {
     this.displayService.showMessage("Заберите деньги");
     this.coinboxService.returnModey();
 
-
     setTimeout(() => {
       this.appStateControlService.setMakeOrderState();
     }, 2000);

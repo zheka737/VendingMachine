@@ -13,7 +13,7 @@ export class BeverageIsReadyToBeTakenState implements IState {
   ) {}
 
   Execute(): void {
-    this.contextualHelp.showMessage("Автомат выдал напиток")
+    this.contextualHelp.showMessage("Автомат выдал напиток");
     this.displayService.setDisplayState(DisplayState.TakeBeverage);
   }
 }

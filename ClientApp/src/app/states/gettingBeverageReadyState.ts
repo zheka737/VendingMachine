@@ -20,7 +20,7 @@ export class GettingBeverageReadyState implements IState {
   Execute(): void {
     let beverageType: BeverageDescription = this.beverageSelectorService.getCurrentlySelectedBeverage();
     this.beverageSelectorService.isReadonly = true;
-    this.contextualHelp.showMessage("Автомат жужжит")
+    this.contextualHelp.showMessage("Автомат жужжит");
 
     this.restDataSource.orderBeverage(beverageType.beverageTypeId).subscribe(
       () => {

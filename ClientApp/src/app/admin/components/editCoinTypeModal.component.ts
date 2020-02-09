@@ -9,10 +9,7 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
   templateUrl: "editCoinTypeModal.component.html"
 })
 export class EditCoinTypeModalContent {
-  constructor(
-
-    public activeModal: NgbActiveModal
-  ) {}
+  constructor(public activeModal: NgbActiveModal) {}
 
   @Input()
   coinType: CoinTypeDTO;
