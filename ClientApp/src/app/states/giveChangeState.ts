@@ -20,6 +20,6 @@ export class GiveChangeState implements IState {
 
     setTimeout(() => {
       this.appStateControlService.setMakeOrderState();
-    }, 2000);
+    }, 4000);
   }
 }

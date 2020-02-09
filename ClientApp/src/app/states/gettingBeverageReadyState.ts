@@ -29,7 +29,7 @@ export class GettingBeverageReadyState implements IState {
     this.restDataSource.orderBeverage(beverageType.beverageTypeId).subscribe(
       () => {
         this.displayService.showMessage("Напиток готовится, подождите...");
-
+        this.coinboxService.updateCurrentCoinBasketValue();
         setTimeout(() => {
           this.appStateControlService.setBeverageIsReadyToBeTakenState();
         }, 2000);
