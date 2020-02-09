@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { RestDataSource } from "./rest.datasource";
 import { CoinTypeDescription } from "./coinTypeDescription.model";
 import { DisplayService } from "../services/display.service";
+import { ContextualHelpService } from "../services/contextualHelp.service";
 
 @Injectable()
 export class CoinRepository {
@@ -11,7 +12,8 @@ export class CoinRepository {
 
   constructor(
     private datasourse: RestDataSource,
-    private displayService: DisplayService
+    private displayService: DisplayService,
+    private contextualHelp: ContextualHelpService
   ) {}
 
   loadCoinsDescription() {
@@ -49,9 +51,10 @@ export class CoinRepository {
       data => {
         this._returnedChangeCoins = data;
 
-        this.returnedChangeCoins.forEach(e => {
-          console.log(e.nominal);
-        });
+        this.contextualHelp.showMessage(`Автомат выдал монеты номиналом: ${this.returnedChangeCoins.reduce((prevVal,currVal,idx) => {
+          return idx == 0 ? currVal.nominal : prevVal + ', ' + currVal.nominal;
+        }, "")}`)
+
       },
       error => {
         console.log(error);

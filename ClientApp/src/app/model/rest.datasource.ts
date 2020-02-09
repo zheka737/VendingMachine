@@ -3,10 +3,11 @@ import { HttpClient, HttpRequest } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { BeverageDescription } from "./beverageDescription.model";
 import { CoinTypeDescription } from "./coinTypeDescription.model";
+import { ContextualHelpService } from "../services/contextualHelp.service";
 
 @Injectable()
 export class RestDataSource {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private contextualHelp: ContextualHelpService) {}
 
   getBeveragesDescription(): Observable<BeverageDescription[]> {
     return this.http.get<BeverageDescription[]>(
@@ -47,7 +48,7 @@ export class RestDataSource {
     const uploadReq = new HttpRequest('POST', `api/admin/beverage/${beverageTypeId}/add-update-beverage-image`, formData);
 
     this.http.request(uploadReq).subscribe(event => {
-      console.log("Успешно загружено");
+      this.contextualHelp.showMessage("Картинка успешно загружена");
     });
   }
 }
