@@ -1,36 +1,44 @@
-<div>
-    <div *ngIf="displayService.displayState == 1">
-        <div class="container">
-            <div class="row">
-                <span>Баланс: {{coinboxService.getCurrentCoinBasketValue()}}</span>
+<div class="h-100 display-background">
+    <div class="h-100" *ngIf="displayService.displayState == 1">
+        <div class="h-25 d-flex justify-content-center align-items-center">
+            <span>Баланс: {{coinboxService.getCurrentCoinBasketValue()}}</span>
+        </div>
+        <div class="h-75 d-flex justify-content-center align-items-center" *ngIf="!checkThatBeverageIsSelected() || !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">
+            <div *ngIf="!checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()!=0">
+                <h3 class="text-center">Выберите напиток</h3>
             </div>
-            <div class="row">
-                <div *ngIf="!checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()!=0">
-                    <span>Выберите напиток</span>
-                </div>
-                <div *ngIf="coinboxService.getCurrentCoinBasketValue()==0">
-                    <span>Внесите деньги для покупки напитка</span>
-                </div>
-                <div *ngIf="checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()!=0 
-                    && !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">
-                    <span>Недостаточно денег для покупки напитка</span>
-                </div>
+            <div *ngIf="coinboxService.getCurrentCoinBasketValue()==0">
+                <h3 class="text-center">Внесите деньги для покупки напитка</h3>
             </div>
-            <div class="row">
-                <button type="button" class="btn btn-primary" (click)="onOrderMadeButtonClick()" [disabled]="!checkThatBeverageIsSelected() || !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">Купить</button>
+            <div *ngIf="checkThatBeverageIsSelected() && coinboxService.getCurrentCoinBasketValue()!=0 
+                && !checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">
+                <h3 class="text-center">Недостаточно денег для покупки напитка</h3>
             </div>
         </div>
+        <div class="h-75 d-flex justify-content-center align-items-center" *ngIf="checkThatBeverageIsSelected() && checkThatThereIsEnoughMoneyInCoinBasketForSelectedBeverage()">
+            <button type="button" class="btn btn-primary btn-lg" (click)="onOrderMadeButtonClick()">Купить</button>
+        </div>
     </div>
-    <div *ngIf="displayService.displayState == 2">
-        <span>{{displayService.message}}</span>
+    <div class="h-100" *ngIf="displayService.displayState == 2">
+        <div class="h-100 d-flex justify-content-center align-items-center">
+            <h3 class="text-center">{{displayService.message}}</h3>
+        </div>
     </div>
-    <div *ngIf="displayService.displayState == 3">
-        <span>{{displayService.notification}}</span>
+    <div class="h-100" *ngIf="displayService.displayState == 3">
+        <div class="h-100 d-flex justify-content-center align-items-center">
+            <h3 class="text-center">{{displayService.notification}}</h3>
+        </div>
     </div>
-    <div *ngIf="displayService.displayState == 4">
-        <span>Заберите напиток</span>
-        <button type="button" class="btn btn-primary" (click)="onContinuePurchasesButtonClick()">Продолжить покупки</button>
-        <button type="button" class="btn btn-secondary" *ngIf="!coinboxService.getCurrentCoinBasketValue()==0" (click)="onTakeChangeButtonPressed()">Забрать
-      сдачу</button>
+    <div class="h-100" *ngIf="displayService.displayState == 4">
+        <div class="h-50 d-flex justify-content-center align-items-center">
+            <h3 class="text-center">Заберите напиток</h3>
+        </div>
+        <div class="h-50 d-flex justify-content-center align-items-center">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" (click)="onContinuePurchasesButtonClick()">Продолжить
+          покупки</button>
+                <button type="button" class="btn btn-secondary" *ngIf="!coinboxService.getCurrentCoinBasketValue()==0" (click)="onTakeChangeButtonPressed()">Забрать сдачу</button>
+            </div>
+        </div>
     </div>
 </div>

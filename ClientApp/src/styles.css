@@ -47,3 +47,7 @@ code {
     z-index: 99;
     font: italic bold 12px/30px;
 }
+
+.display-background {
+    background-color: gainsboro;
+}
