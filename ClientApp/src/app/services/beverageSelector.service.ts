@@ -2,23 +2,29 @@ import { Injectable } from "@angular/core";
 import { BeveragesDescriptionRepository } from "../model/beverageDescription.repository";
 import { BeverageDescription } from "../model/beverageDescription.model";
 
-
 @Injectable()
 export class BeverageSelectorService {
-  constructor(private beveragesDescriptionRepository: BeveragesDescriptionRepository) {}
+  constructor(
+    private beveragesDescriptionRepository: BeveragesDescriptionRepository
+  ) {}
+
+  isReadonly: boolean = false;
 
   getBeveragesDescription(): BeverageDescription[] {
     return this.beveragesDescriptionRepository.getBeverageDescriptions();
   }
 
   selectBeverage(beverage: BeverageDescription) {
-    this.getBeveragesDescription().forEach(e => e.selected = false);
-    beverage.selected = true;
+    if (!this.isReadonly) {
+      this.getBeveragesDescription().forEach(e => (e.selected = false));
+      beverage.selected = true;
+    }
   }
 
-  
   unselectAllBeverages() {
-    this.getBeveragesDescription().forEach(e => e.selected = false);
+    if (!this.isReadonly) {
+      this.getBeveragesDescription().forEach(e => (e.selected = false));
+    }
   }
 
   getCurrentlySelectedBeverage(): BeverageDescription {

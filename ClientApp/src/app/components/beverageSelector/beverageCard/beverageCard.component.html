@@ -1,7 +1,7 @@
 <div class="m-2 p-1 position-relative">
 
 
-    <button class="btn btn-fix text-left" (click)="onSelectionChange()" [class.selected-beverage]="beverage.selected" [disabled]="!beverage.available || notEnoughMoney">
+    <button class="btn btn-fix text-left" (click)="onSelectionChange()" [class.selected-beverage]="beverage.selected" [disabled]="!beverage.available || notEnoughMoney" style="opacity: unset;">
     <div class="card" style="width: 10rem; height: 15rem;">
       <div [class.disabled-card]="!beverage.available || (notEnoughMoney &&  userInsertedCoins)">
         <img [beverage-image]="beverage.beverageTypeId" class="card-img-top">
@@ -17,7 +17,7 @@
     <div class="image-text-centered" *ngIf="!beverage.available"><span>
       Недоступен
     </span></div>
-    <div class="image-text-centered" *ngIf="notEnoughMoney && beverage.available"><span>
-        Недостаточно денег
-      </span></div>
+    <div class="image-text-centered" *ngIf="(notEnoughMoney &&  userInsertedCoins) && beverage.available"><span>
+      Недостаточно денег
+    </span></div>
 </div>

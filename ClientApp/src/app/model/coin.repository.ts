@@ -39,7 +39,6 @@ export class CoinRepository {
 
   updateCurrentCoinBasketValue() {
     this.datasourse.getTotalCoinBasketValue().subscribe(data => {
-      this.beverageSelectorService.unselectAllBeverages();
       this._currentCoinBasketValue = data;
     });
   }
@@ -49,6 +48,7 @@ export class CoinRepository {
   }
 
   getChange() {
+    this.beverageSelectorService.unselectAllBeverages();
     this.datasourse.getChange().subscribe(
       data => {
         this._returnedChangeCoins = data;
