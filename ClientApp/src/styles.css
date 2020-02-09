@@ -1,27 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 /* Provide sufficient contrast against white background */
+
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 code {
-  color: #e01a76;
+    color: #e01a76;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .disabled-card {
-  /* create a custom class so you
+    /* create a custom class so you
      do not run into specificity issues
      against bootstraps styles
      which tends to work better than using !important
      (future you will thank you later)*/
-
-    background-color: rgba(245, 245, 245, 1);
+    background-color: rgb(133, 122, 122);
     opacity: .4;
-  }
+}
+
+.btn-fix {
+    padding: 0;
+    border: none;
+    white-space: normal;
+}
+
+.selected-beverage {
+    border: gray;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.image-text-centered {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 99;
+    font: italic bold 12px/30px;
+}

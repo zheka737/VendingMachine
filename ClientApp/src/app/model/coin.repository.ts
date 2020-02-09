@@ -3,6 +3,7 @@ import { RestDataSource } from "./rest.datasource";
 import { CoinTypeDescription } from "./coinTypeDescription.model";
 import { DisplayService } from "../services/display.service";
 import { ContextualHelpService } from "../services/contextualHelp.service";
+import { BeverageSelectorService } from "../services/beverageSelector.service";
 
 @Injectable()
 export class CoinRepository {
@@ -12,8 +13,8 @@ export class CoinRepository {
 
   constructor(
     private datasourse: RestDataSource,
-    private displayService: DisplayService,
-    private contextualHelp: ContextualHelpService
+    private contextualHelp: ContextualHelpService,
+    private beverageSelectorService: BeverageSelectorService
   ) {}
 
   loadCoinsDescription() {
@@ -38,6 +39,7 @@ export class CoinRepository {
 
   updateCurrentCoinBasketValue() {
     this.datasourse.getTotalCoinBasketValue().subscribe(data => {
+      this.beverageSelectorService.unselectAllBeverages();
       this._currentCoinBasketValue = data;
     });
   }

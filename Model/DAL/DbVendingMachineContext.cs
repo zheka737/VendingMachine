@@ -34,6 +34,16 @@ namespace VendingMachine.Model.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BeverageType>(entity => {
+                entity.Property(e => e.Id).UseIdentityColumn();
+
+            });
+
+            modelBuilder.Entity<CoinType>(entity => {
+                entity.Property(e => e.Id).UseIdentityColumn();
+
+            });
+
             modelBuilder.Entity<BeverageStore>(entity =>
             {
                 entity.HasOne(e => e.BeverageType)

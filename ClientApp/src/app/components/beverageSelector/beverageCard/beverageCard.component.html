@@ -1,12 +1,23 @@
-<div>
-    <div>
-        <input class="form-check-input" type="checkbox" [(ngModel)]="beverage.selected" (change)="onSelectionChange($event)">
+<div class="m-2 p-1 position-relative">
+
+
+    <button class="btn btn-fix text-left" (click)="onSelectionChange()" [class.selected-beverage]="beverage.selected" [disabled]="!beverage.available || notEnoughMoney">
+    <div class="card" style="width: 10rem; height: 15rem;">
+      <div [class.disabled-card]="!beverage.available || (notEnoughMoney &&  userInsertedCoins)">
+        <img [beverage-image]="beverage.beverageTypeId" class="card-img-top">
+      </div>
+
+      <div class="card-block ">
+        <p class="card-text">{{beverage.name}}</p>
+        <p class="card-text">{{beverage.cost}}</p>
+      </div>
+
     </div>
-    <div>
-        <div class="card" style="width: 18rem;" [class.disabled-card]="!beverage.available">
-            <img [beverage-image]="beverage.beverageTypeId" class="card-img-top">
-            <p class="card-text">{{beverage.name}}</p>
-            <p class="card-text">{{beverage.cost}}</p>
-        </div>
-    </div>
+  </button>
+    <div class="image-text-centered" *ngIf="!beverage.available"><span>
+      Недоступен
+    </span></div>
+    <div class="image-text-centered" *ngIf="notEnoughMoney && beverage.available"><span>
+        Недостаточно денег
+      </span></div>
 </div>

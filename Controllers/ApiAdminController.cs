@@ -97,13 +97,12 @@ public class AdminController : ControllerBase
             beverageType = new BeverageType{
                 BeverageStore = new BeverageStore()
             };
+            db.BeverageTypes.Add(beverageType);
         }
 
         beverageType.Name = beverage.Name;
         beverageType.Cost = beverage.Cost;
         beverageType.BeverageStore.Quantity = beverage.Quantity;
-
-        db.BeverageTypes.Add(beverageType);
 
         await db.SaveChangesAsync();
 

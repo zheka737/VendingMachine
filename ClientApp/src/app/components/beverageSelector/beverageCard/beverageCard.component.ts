@@ -9,14 +9,18 @@ export class BeverageCardComponent {
   @Input()
   private beverage: BeverageDescription;
 
+  @Input()
+  notEnoughMoney: boolean;
+
+  @Input()
+  userInsertedCoins: boolean;
+
   @Output()
   onBeverageSelected: EventEmitter<BeverageDescription> = new EventEmitter();
 
   constructor() {}
 
   onSelectionChange(event) {
-    if(event.target.checked) {
-      this.onBeverageSelected.emit(this.beverage);
-    }
+    this.onBeverageSelected.emit(this.beverage);
   }
 }

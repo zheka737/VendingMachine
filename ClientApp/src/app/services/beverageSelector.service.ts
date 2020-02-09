@@ -16,6 +16,11 @@ export class BeverageSelectorService {
     beverage.selected = true;
   }
 
+  
+  unselectAllBeverages() {
+    this.getBeveragesDescription().forEach(e => e.selected = false);
+  }
+
   getCurrentlySelectedBeverage(): BeverageDescription {
     return this.getBeveragesDescription().find(e => e.selected);
   }

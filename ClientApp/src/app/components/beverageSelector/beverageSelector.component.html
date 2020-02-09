@@ -1,7 +1,7 @@
-<div>
+<div class="card-columns">
 
-  <div *ngFor="let beverage of beverageSelectorService.getBeveragesDescription()">
-    <beverage-card [beverage]="beverage" (onBeverageSelected)="onBeverageSelectionHandler($event)"></beverage-card>
-  </div>
+    <div *ngFor="let beverage of beverageSelectorService.getBeveragesDescription()">
+        <beverage-card [beverage]="beverage" (onBeverageSelected)="onBeverageSelectionHandler($event)" [notEnoughMoney]="coinRepository.currentCoinBasketValue < beverage.cost" [userInsertedCoins]="coinRepository.currentCoinBasketValue > 0"></beverage-card>
+    </div>
 
 </div>
