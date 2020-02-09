@@ -1,24 +1,17 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <span>Редактирование</span>
-        </div>
-    </div>
-    <div class="row">
-        <form #formCoin="ngForm" class="form-inline">
-            <label>Номинал {{coinType.nominal}}</label>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Редактирование монеты номиналом {{coinType.nominal}}</h4>
+</div>
+<div class="modal-body">
+    <form #formCoin="ngForm" class="form-inline">
 
-            <label class="sr-only" for="inlineFormInputName3">Кол-во</label>
-            <input type="number" class="form-control mb-2 mr-sm-2" id="inlineFormInputName3" name="inlineFormInputName3" required [(ngModel)]="coinType.count">
+        <label for="inlineFormInputName3">Кол-во</label>
+        <input type="number" class="form-control mr-auto" id="inlineFormInputName3" name="inlineFormInputName3" required [(ngModel)]="coinType.count">
 
-            <label class="sr-only" for="inlineFormInputName4">Заблокирована</label>
-            <input type="checkbox" class="form-control mb-2 mr-sm-2" id="inlineFormInputName4" name="inlineFormInputName4" required [(ngModel)]="coinType.blocked">
-
-            <button type="submit" class="btn btn-primary mb-2" (click)="onSaveButtonClicked()" [disabled]="formCoin.invalid">Сохранить</button>
-            <button type="button" class="btn btn-primary mb-2" (click)="onCancelButtonClicked()">Отмена</button>
-        </form>
-
-
-    </div>
-
+        <label for="inlineFormInputName4">Заблокирована</label>
+        <input type="checkbox" class="form-control" id="inlineFormInputName4" name="inlineFormInputName4" [(ngModel)]="coinType.blocked">
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary mb-2" (click)="onSaveButtonClicked()" [disabled]="formCoin.invalid">Сохранить</button>
+    <button type="button" class="btn btn-secondary mb-2" (click)="onCancelButtonClicked()">Отмена</button>
 </div>

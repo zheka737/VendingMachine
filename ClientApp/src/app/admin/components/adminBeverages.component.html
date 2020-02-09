@@ -14,10 +14,10 @@
                     <th>
                         Имя
                     </th>
-                    <th>
+                    <th class="text-center">
                         Кол-во
                     </th>
-                    <th>
+                    <th class="text-center">
                         Цена
                     </th>
                     <th>
@@ -30,13 +30,13 @@
                     <td>
                         {{beverage.name}}
                     </td>
-                    <td>
+                    <td class="text-center">
                         {{beverage.quantity}}
                     </td>
-                    <td>
+                    <td class="text-center">
                         {{beverage.cost}}
                     </td>
-                    <td>
+                    <td class="text-center">
                         <button type="button" class="btn btn-warning" (click)="onEditBeverageClick(beverage)">Изменить</button>
                         <button type="button" class="btn btn-danger" (click)="onDeleteClick(beverage)">Удалить</button>
 
