@@ -2,7 +2,7 @@
     <div *ngIf="displayService.displayState == 1">
         <div class="container">
             <div class="row">
-                <span>Current balance: {{coinboxService.getCurrentCoinBasketValue()}}</span>
+                <span>Баланс: {{coinboxService.getCurrentCoinBasketValue()}}</span>
             </div>
             <div class="row">
                 <div *ngIf="!checkThatBeverageIsSelected()">
