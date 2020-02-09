@@ -2,14 +2,14 @@
 
 
     <button class="btn btn-fix text-left" (click)="onSelectionChange()" [class.selected-beverage]="beverage.selected" [disabled]="!beverage.available || notEnoughMoney" style="opacity: unset;">
-    <div class="card" style="width: 10rem; height: 15rem;">
+    <div class="card" style="width: 10rem; height: 12rem;">
       <div [class.disabled-card]="!beverage.available || (notEnoughMoney &&  userInsertedCoins)">
-        <img [beverage-image]="beverage.beverageTypeId" class="card-img-top">
+        <img [beverage-image]="beverage.beverageTypeId" class="card-img-top" style="width: 10rem; height: 10rem;">
       </div>
 
-      <div class="card-block ">
-        <p class="card-text">{{beverage.name}}</p>
-        <p class="card-text">{{beverage.cost}}</p>
+      <div class="card-block w-100 d-flex align-items-center" style="background-color: seashell;">
+        <div class="card-text w-50 text-left d-inline-block mr-auto beverage-name">{{beverage.name}}</div>
+        <span class="badge badge-info">{{beverage.cost | currency:'': 'symbol': '1.0-0'}}</span>
       </div>
 
     </div>

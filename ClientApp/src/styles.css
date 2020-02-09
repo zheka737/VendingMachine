@@ -45,7 +45,11 @@ code {
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     z-index: 99;
-    font: italic bold 12px/30px;
+    font-weight: 600;
+}
+
+.beverage-name {
+    font-weight: 600;
 }
 
 .display-background {
