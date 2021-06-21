@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace VendingMachine.Model.DAL
 {
@@ -28,8 +29,7 @@ namespace VendingMachine.Model.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseSqlServer(
-                @$"Data Source=localhost\SQLEXPRESS;DataBase=VendingMachineDB;Integrated Security=True;Connect Timeout=30;AttachDbFilename={Startup.MDF_Directory}");
+            optionsBuilder.UseSqlite(@"Data Source=.\VendingMachine.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

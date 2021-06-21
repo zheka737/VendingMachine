@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VendingMachine.Migrations
 {
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,9 +12,9 @@ namespace VendingMachine.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
-                    Image = table.Column<byte>(nullable: false),
+                    Image = table.Column<byte[]>(nullable: true),
                     Cost = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -26,7 +27,7 @@ namespace VendingMachine.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nominal = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -39,7 +40,7 @@ namespace VendingMachine.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Quantity = table.Column<int>(nullable: false),
                     BeverageTypeId = table.Column<int>(nullable: false)
                 },
@@ -55,11 +56,30 @@ namespace VendingMachine.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CoinsInBasket",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CoinTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CoinsInBasket", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CoinsInBasket_CoinTypes_CoinTypeId",
+                        column: x => x.CoinTypeId,
+                        principalTable: "CoinTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CoinTypeSettings",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Blocked = table.Column<bool>(nullable: false),
                     CoinTypeId = table.Column<int>(nullable: false)
                 },
@@ -79,7 +99,7 @@ namespace VendingMachine.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Count = table.Column<int>(nullable: false),
                     CoinTypeId = table.Column<int>(nullable: false)
                 },
@@ -101,6 +121,11 @@ namespace VendingMachine.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_CoinsInBasket_CoinTypeId",
+                table: "CoinsInBasket",
+                column: "CoinTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CoinTypeSettings_CoinTypeId",
                 table: "CoinTypeSettings",
                 column: "CoinTypeId",
@@ -117,6 +142,9 @@ namespace VendingMachine.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BeverageStores");
+
+            migrationBuilder.DropTable(
+                name: "CoinsInBasket");
 
             migrationBuilder.DropTable(
                 name: "CoinTypeSettings");

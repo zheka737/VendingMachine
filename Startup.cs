@@ -22,14 +22,6 @@ namespace VendingMachine
 
         public IConfiguration Configuration { get; }
 
-        public static string MDF_Directory
-        {
-            get
-            {
-                var directoryPath = AppDomain.CurrentDomain.BaseDirectory;
-                return Path.GetFullPath(Path.Combine(directoryPath, "..//..//..//App_Data//VendingMachineDB.mdf"));
-            }
-        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -83,23 +75,11 @@ namespace VendingMachine
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            // app.UseSpa(spa =>
-            // {
-            //     // To learn more about options for serving an Angular SPA from ASP.NET Core,
-            //     // see https://go.microsoft.com/fwlink/?linkid=864501
-
-            //     spa.Options.SourcePath = "ClientApp";
-
-            //     if (env.IsDevelopment())
-            //     {
-            //         spa.UseAngularCliServer(npmScript: "start");
-            //     }
-            // });
         }
 
         public void SeedDB(DbVendingMachineContext db)
         {
-            if (db.BeverageTypes.Any() == false)
+            if (!db.BeverageTypes.Any())
             {
 
                 var beverageType1 = new BeverageType
