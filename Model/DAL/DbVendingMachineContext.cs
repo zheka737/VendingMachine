@@ -29,7 +29,7 @@ namespace VendingMachine.Model.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseSqlite(@"Data Source=.\VendingMachine.db");
+            optionsBuilder.UseSqlite(@"Data Source=./VendingMachine.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
