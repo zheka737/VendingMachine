@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json --port 4200",
+    "start": "ng serve --port 4200",
     "build": "ng build",
     "build:ssr": "ng run VendingMachine:server:dev",
     "test": "ng test",
