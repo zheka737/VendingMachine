@@ -40,7 +40,7 @@ namespace VendingMachine
 
             services.AddScoped(typeof(CoinboxService));
 
-            SeedDB(services.BuildServiceProvider().GetService<DbVendingMachineContext>());
+            //SeedDB(services.BuildServiceProvider().GetService<DbVendingMachineContext>());
         }
 
 
@@ -67,6 +67,9 @@ namespace VendingMachine
             }
 
             app.UseRouting();
+
+
+            app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,3 +1,9 @@
+docker build -t aspnetapp .
+docker run -d -p 5000:5000 --name myapp aspnetapp
+
+docker build -t angular .
+docker run -dp 4200:4200 angular
+
 
 Проэкт полностью соответствует ТЗ. Интерфейс состоит из трех главных блоков:
 Панель выбора напитка, Монетоприемник, "Сенсорный дисплей".

@@ -10,15 +10,15 @@ export class AdminRestDataSource {
   constructor(private http: HttpClient) {}
 
   getAllBeverages(): Observable<BeverageDTO[]> {
-    return this.http.get<BeverageDTO[]>("/api/admin/all-beverages");
+    return this.http.get<BeverageDTO[]>("http://localhost:5000/api/admin/all-beverages");
   }
 
   getAllCoinTypes(): Observable<CoinTypeDTO[]> {
-    return this.http.get<CoinTypeDTO[]>("/api/get-all-coin-types");
+    return this.http.get<CoinTypeDTO[]>("http://localhost:5000/api/get-all-coin-types");
   }
 
   editCoinType(coinType: CoinTypeDTO) {
-    return this.http.post("/api/edit-coin-type", coinType).pipe(share());
+    return this.http.post("http://localhost:5000/api/edit-coin-type", coinType).pipe(share());
   }
 
   uploadBeverageImage(file, beverageTypeId: number): Observable<Object> {
@@ -30,7 +30,7 @@ export class AdminRestDataSource {
 
     const uploadReq = new HttpRequest(
       "POST",
-      `api/admin/beverage/${beverageTypeId}/add-update-beverage-image`,
+      `http://localhost:5000/api/admin/beverage/${beverageTypeId}/add-update-beverage-image`,
       formData
     );
 
@@ -39,12 +39,12 @@ export class AdminRestDataSource {
 
   addEditBeverage(beverage: BeverageDTO): Observable<BeverageDTO> {
     return this.http
-      .post<BeverageDTO>("/api/add-edit-beverage", beverage)
+      .post<BeverageDTO>("http://localhost:5000/api/add-edit-beverage", beverage)
       .pipe(share());
   }
 
   deleteBeverage(beverageId: number): Observable<Object> {
-    return this.http.delete(`/api/api/beverages/${beverageId}/delete`);
+    return this.http.delete(`http://localhost:5000/api/api/beverages/${beverageId}/delete`);
   }
 
 
